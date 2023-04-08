@@ -1,0 +1,30 @@
+.gr_welcome_title {
+  color: $welcomeTitle;
+}
+
+.gr_you_added {
+  background-color: $youHaveAddedContainer;
+  color: $youHaveAddedText;
+}
+
+.gr_option_container {
+  transform: translateY(0rem);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    transition: transform 0.3s ease;
+  }
+}
+
+.gr_box_options {
+  border: 0.5rem solid $borderColorChoice;
+}
+
+.gr_icon_choice {
+  color: $iconChoiceColor;
+}
+
+.gr_text_choice {
+  color: $textChoice;
+}

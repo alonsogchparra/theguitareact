@@ -1,0 +1,38 @@
+label#email_input-label,
+label#password_input-label {
+  color: $songTitleLabel;
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+
+  &:focus {
+    color: $songTitleLabel;
+    font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  }
+}
+
+input#email_input,
+input#password_input {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: $songTitleLabel;
+}
+
+// CHECKING
+
+// form .gr_password_input div {
+//   border-bottom: 1px solid purple !important;
+// }
+
+form .gr_email_input div::before,
+form .gr_password_input div::before {
+  border-bottom: 1px solid $inputBottomLine !important;
+}
+
+form .gr_email_input div::after,
+form .gr_password_input div::after {
+  border-bottom: 2px solid $inputSelected !important;
+}
+
+.gr_icon_textfield {
+  color: $songTitleLabel;
+}

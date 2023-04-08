@@ -1,0 +1,40 @@
+.gr_song_info_box {
+  background-color: $songInfoBox;
+}
+
+.gr_info_text {
+  color: $grInfoText
+}
+
+.gr_text_bpm,
+.gr_text_start_over {
+  color: $bpmTextColor;
+}
+
+span.gr_bpm_bar {
+  color: $bpmBar;
+}
+
+.gr_bpm_bar .css-eg0mwd-MuiSlider-thumb:hover,
+.gr_bpm_bar .css-eg0mwd-MuiSlider-thumb.Mui-focusVisible {
+  box-shadow: 0px 0px 0px 8px $bpmBarHover;
+}
+
+.gr_bpm_bar .css-eg0mwd-MuiSlider-thumb.Mui-active {
+  box-shadow: 0px 0px 0px 14px $bpmBarHover;
+}
+
+button.gr_next_btn,
+button.gr_start_btn {
+  background-color: $bgAddSongBtn;
+  color: $textAddSong;
+
+  &:hover {
+    background-color: $addSongBtnHover;
+  }
+}
+
+
+.gr_bpm_container .gr_bpm_bar span.MuiSlider-thumb:hover {
+  box-shadow: 0px 0px 0px 8px var(--bpmBarHover);
+}

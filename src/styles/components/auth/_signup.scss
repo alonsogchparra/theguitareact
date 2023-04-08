@@ -1,0 +1,15 @@
+label#confirm_password_input-label {
+  color: $songTitleLabel;
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+
+  &:focus {
+    color: $songTitleLabel;
+    font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  }
+}
+
+input#confirm_password_input {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+}

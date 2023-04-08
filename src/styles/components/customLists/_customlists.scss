@@ -1,0 +1,138 @@
+.gr_list_container {
+  background-color: $listContainer;
+
+  .gr_list_item_title {
+    padding-bottom: 1rem;
+  }
+
+  hr.gr_divider_title {
+    background-color: $dividerColor;
+    border-width: 0.08rem;
+  }
+
+  .gr_custom_title,
+  .gr_custom_item_text {
+    color: $customTitle;
+  }
+
+  hr.gr_divider {
+    background-color: $dividerColor;
+  }
+
+  .gr_btn_container {
+    padding-top: 1rem;
+  }
+
+  .gr_edit_btn,
+  .gr_delete_btn,
+  .gr_cancel_btn,
+  .gr_save_btn {
+    color: $btnColor;
+  }
+
+  button.gr_play_list_btn {
+    background-color: $bgBtnPlayList;
+    color: $colorTextBtn;
+
+    &:hover {
+      background-color: $bgBtnPlayListHover;
+    }
+  }
+}
+
+.gr_division {
+  background-color: $division;
+}
+
+// Modal
+
+.gr_modal_box {
+  background-color: $modalBox;
+
+  .gr_close_modal_btn {
+    color: $closeModal;
+  }
+
+  .gr_modal_text_one,
+  .gr_modal_text_two {
+    color: $modalText;
+  }
+
+  .gr_box_options_modal {
+    border: 0.5rem solid $modalBoxBorder;
+
+    .gr_icon_choice_modal,
+    .gr_text_choice_modal {
+      color: $modalBoxIcon;
+    }
+  }
+}
+
+// Temporal Title TextField
+// .css-1wbh3h4-MuiInputBase-root-MuiInput-root:hover:not(
+//     .Mui-disabled,
+//     .Mui-error
+//   ):before {
+//   border-bottom: 2px solid $textFieldTwo !important;
+// }
+
+// li .gr_temporal_title .css-1wbh3h4-MuiInputBase-root-MuiInput-root:after {
+//   border-bottom: 2px solid $textFieldColor !important;
+// }
+
+// .css-1wbh3h4-MuiInputBase-root-MuiInput-root {
+//   color: $textFieldTwo !important;
+// }
+
+// .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+//   color: $textFieldColor !important;
+// }
+
+// .css-1wbh3h4-MuiInputBase-root-MuiInput-root:before {
+//   border-bottom: 1px solid $textFieldTwo !important;
+// }
+
+// NEW INPUT CHANGE TEMPORAL TITLE
+
+input#title-custom {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 600;
+  font-size: 1rem;
+  color: $textFieldColor;
+}
+
+// span.gr_change_title .css-1wbh3h4-MuiInputBase-root-MuiInput-root:before {
+//   border-bottom: 1px solid $textFieldTwo;
+// }
+
+// span.gr_change_title
+//   .css-1wbh3h4-MuiInputBase-root-MuiInput-root:hover:not(
+//     .Mui-disabled,
+//     .Mui-error
+//   ):before {
+//   border-bottom: 2px solid $textFieldTwo;
+// }
+
+// span.gr_change_title .css-1wbh3h4-MuiInputBase-root-MuiInput-root:after {
+//   border-bottom: 2px solid $textFieldOne;
+// }
+
+span.gr_change_title
+  .MuiInputBase-root.MuiInput-root.MuiInput-underline:before {
+  border-bottom: 1px solid $textFieldTwo;
+}
+
+span.gr_change_title
+  .MuiInputBase-root.MuiInput-root:hover:not(
+    .Mui-disabled,
+    .Mui-error
+  )::before {
+  border-bottom: 2px solid $textFieldTwo;
+}
+
+
+
+span.gr_change_title
+  .MuiInputBase-root.MuiInput-root.MuiInput-underline:after {
+  border-bottom: 2px solid $textFieldTwo;
+}

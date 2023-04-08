@@ -1,0 +1,88 @@
+.gr_add_song_title {
+  color: $addSongTitle;
+}
+
+// Input Song Title
+
+label#song-title-label,
+label#artist-name-label,
+label#additional-info-label {
+  color: $songTitleLabel;
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+
+  &:focus {
+    color: $songTitleLabel;
+    font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  }
+}
+
+input#song-title,
+input#artist-name,
+textarea#additional-info {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: $addSongTitle;
+}
+
+form .css-l4u8b9-MuiInputBase-root-MuiInput-root {
+  color: $songTitleLabel;
+}
+
+form
+  .MuiInputBase-fullWidth.MuiInputBase-formControl.css-l4u8b9-MuiInputBase-root-MuiInput-root:before {
+  border-bottom: 1px solid $inputBottomLine;
+}
+
+// Input selected
+form .css-l4u8b9-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid $inputSelected;
+}
+
+// TextArea
+
+form .css-8ewcdo-MuiInputBase-root-MuiOutlinedInput-root {
+  color: $songTitleLabel;
+}
+
+form .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: $inputBottomLine;
+}
+
+form
+  .css-8ewcdo-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: $inputSelected;
+  border-width: 2px;
+}
+
+// Add Song Button
+form .gr_add_button {
+  background-color: $bgAddSongBtn;
+  color: $textAddSong;
+
+  &:hover {
+    background-color: $addSongBtnHover;
+  }
+}
+
+// Input color Custom updated
+
+form > div > .gr_extra_info div > fieldset,
+form > div > .gr_extra_info div > fieldset:hover {
+  border-color: $inputBottomLine !important;
+}
+
+// form
+//   > div
+//   > .gr_extra_info
+//   div.MuiInputBase-multiline
+//   > fieldset.Mui-focused.MuiOutlinedInput-notchedOutline {
+//   border-color: #cc19d2 !important;
+//   border-width: 2px;
+// }
+
+form .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: $inputSelected !important;
+  border-width: 2px;
+}

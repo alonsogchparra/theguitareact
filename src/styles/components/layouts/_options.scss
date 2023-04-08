@@ -1,0 +1,22 @@
+.gr_options_container {
+  position: absolute;
+  top: 49px;
+  right: 27px;
+  z-index: 1;
+
+  .gr_option {
+    color: $optionColor;
+  }
+}
+
+span.box-one {
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: $boxOne;
+}
+
+span.box-two {
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: $boxTwo;
+}

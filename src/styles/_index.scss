@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
+// General styles
+
+body {
+  background-color: $bg !important;
+  transition: background-color 0.5s ease;
+  height: 100vh;
+  margin: 0;
+}
+
+body.gr_bg_gradient {
+  background: $bg !important;
+  transition: $bgClear 1s, $bgDark 1s !important;
+  // background: radial-gradient(ellipse at center, $bgClear, $bgDark) !important;
+  background: radial-gradient(
+    76.95% 76.95% at 50% 50%,
+    $bgClear 0%,
+    $bgDark 100%
+  ) !important;
+  height: 100vh;
+  margin: 0;
+}

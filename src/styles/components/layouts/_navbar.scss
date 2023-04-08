@@ -1,0 +1,88 @@
+/* Created with https://www.css-gradient.com */
+// background: #11384A;
+// background: -webkit-radial-gradient(center, #11384A, #0D191C);
+// background: -moz-radial-gradient(center, #11384A, #0D191C);
+// background: radial-gradient(ellipse at center, #11384A, #0D191C);
+
+.gr_nav_tittle {
+  color: $navTitle;
+}
+
+.gr_nav_item {
+  color: $navItem;
+  transition: color 0.5s ease;
+}
+
+.gr_nav_item_selected {
+  color: $navItemHover;
+}
+
+// Drawer
+
+.gr_menu_drawer {
+  color: $menuDrawer;
+}
+
+.gr_bg_drawer {
+  background-color: $bgDrawer;
+}
+
+.gr_close_drawer {
+  color: $closeDrawer;
+}
+
+.gr_title_drawer {
+  color: $titleDrawer;
+}
+
+.gr_items_drawer {
+  color: $itemsDrawer;
+}
+
+li.gr_ct_container_drawer {
+  background-color: $ctContainerDrawer;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  cursor: pointer;
+
+  div {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+li.gr_vms_container_drawer {
+  background-color: $ctContainerDrawer;
+  transition: background-color 0.5s ease;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  cursor: pointer;
+
+  div {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+li.gr_logout_container_drawer {
+  background-color: $logoutContainerDrawer;
+  transition: background-color 0.5s ease;
+  padding-bottom: 15px;
+  padding-top: 15px;
+
+  a {
+    width: 100%;
+  }
+
+  div {
+    width: 100%;
+    text-align: center;
+    color: $logoutTextDrawer;
+  }
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorRight.css-1160xiw-MuiPaper-root-MuiDrawer-paper {
+  background-color: $bgDrawer;
+  // transition: background-color 0.5s ease !important;
+}

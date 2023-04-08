@@ -1,0 +1,119 @@
+.gr_songs_list {
+  color: $songsListTitle;
+}
+
+// Input Search
+
+label#song-artist-title-label {
+  color: $songTitleLabel;
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+
+  &:focus {
+    color: $songTitleLabel;
+    font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  }
+}
+
+input#song-artist-title {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: $songTitleLabel;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-adornedEnd.css-l4u8b9-MuiInputBase-root-MuiInput-root {
+  border-bottom: 1px solid $inputBottomLine;
+}
+
+.MuiContainer-root
+  .MuiFormControl-fullWidth
+  .css-l4u8b9-MuiInputBase-root-MuiInput-root:hover:not(
+    .Mui-disabled,
+    .Mui-error
+  ):before {
+  border-bottom: 1px solid $inputBottomLine;
+}
+
+.MuiFormControl-fullWidth .css-l4u8b9-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid $inputSelected;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+  color: $songTitleLabel;
+}
+
+.gr_song_name,
+.gr_song_info {
+  color: $songName;
+}
+
+.gr_song_action {
+  color: $songAction;
+}
+
+.gr_song_box {
+  border: 3px solid $songBox;
+}
+
+.gr_top_line {
+  border-top: 1px solid $songTopLine;
+}
+
+// Button Songs Selected
+button.gr_songs_selected_btn {
+  background-color: $songsSelectedBtn;
+
+  &:hover {
+    background-color: $songsSelectedBtnHover;
+  }
+
+  .gr_icon_songs_selected {
+    color: $iconSongsSelected;
+  }
+
+  .gr_number_songs_selected {
+    color: $numberSongsSelected;
+  }
+}
+
+// Modal
+
+.gr_modal_songs_list
+  .MuiBackdrop-root.MuiModal-backdrop.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+  background-color: rgb(0 0 0 / 18%);
+}
+
+// Input Search New
+label#song-artist-title-label {
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-size: 1rem;
+  font-weight: 400;
+  color: $songTitleLabel;
+
+  &:focus {
+    color: $songTitleLabel;
+    font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+  }
+}
+
+input#song-artist-title {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.gr_search_songs_list .css-cw8s5u-MuiInputBase-root-MuiInput-root:before {
+  border-bottom: 1px solid $inputBottomLine;
+}
+
+.gr_search_songs_list
+  .css-cw8s5u-MuiInputBase-root-MuiInput-root:hover:not(
+    .Mui-disabled,
+    .Mui-error
+  ):before {
+  border-bottom: 2px solid $inputBottomLine;
+}
+
+.gr_search_songs_list .css-cw8s5u-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid $inputSelected;
+}

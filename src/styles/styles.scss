@@ -1,0 +1,20 @@
+// UI Settings
+@import './base/_settings';
+
+// Components
+@import './components/addsong/_addsong';
+@import './components/auth/_signin';
+@import './components/auth/_signup';
+@import './components/customLists/_customlists';
+@import './components/dashboard/_dashboard';
+@import './components/layouts/_loading';
+@import './components/layouts/_loadingall';
+@import './components/layouts/_navbar';
+@import './components/layouts/_options';
+@import './components/randoms/_songswithbpm';
+@import './components/randoms/_videos';
+@import './components/songslist/_songselectbpm';
+@import './components/songslist/_songslist';
+
+// Global Settings
+@import './_index';

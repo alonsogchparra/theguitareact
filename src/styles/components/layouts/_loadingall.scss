@@ -1,0 +1,10 @@
+.gr_loading_box span.gr_loading {
+  background-color: $barColorBg !important;
+}
+
+.gr_loading_box span.gr_loading .MuiLinearProgress-bar1Indeterminate {
+  background-color: $colorBarOne !important;
+}
+.gr_loading_box span.gr_loading .MuiLinearProgress-bar2Indeterminate {
+  background-color: $colorBarTwo !important;
+}
