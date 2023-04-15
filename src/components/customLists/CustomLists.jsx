@@ -454,7 +454,7 @@ export const CustomLists = () => {
                 and create a custom songs list to play
               </Typography>
             </Container>
-          ) : customLists.length > 0 ? (
+          ) : customLists !== undefined ? (
             <Box width='100%'>
               <Typography
                 component='div'
