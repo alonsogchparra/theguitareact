@@ -20,9 +20,9 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import { SongItem } from './SongItem';
-import { Loading } from '../layouts/Loading';
 import { SongModal } from './SongModal';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   addTemporalSongs,
   deleteTemporalSong,
@@ -33,7 +33,7 @@ import {
   songsLocal,
   updateLocalSongs,
 } from '../../features/songs/localSongsSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { LoadingAll } from '../layouts/LoadingAll';
 
 let theme = createTheme({
   typography: {
@@ -327,7 +327,7 @@ export const SongsList = () => {
               <Grid container spacing={3} paddingTop={5}>
                 {isLoading ? (
                   <Container maxWidth='sm'>
-                    <Loading />
+                    <LoadingAll />
                   </Container>
                 ) : (
                   copySongs &&
