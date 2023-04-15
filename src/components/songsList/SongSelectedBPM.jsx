@@ -12,6 +12,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMetronome } from '../../hooks/useMetronome';
 import Grid from '@mui/material/Unstable_Grid2';
+import Metronome from '@kevinorriss/react-metronome';
 
 let theme = createTheme({
   typography: {
@@ -149,46 +150,52 @@ export const SongSelectedBPM = () => {
                     </Box>
 
                     <Box width='100%' paddingTop={5}>
-                      <Typography
-                        variant='h4'
-                        component='div'
-                        textAlign='center'
-                        fontWeight='700'
-                        className='gr_text_bpm'
-                      >
-                        BPM: {bpm}
-                      </Typography>
-                      <Box
-                        width='100%'
-                        paddingTop={2}
-                        className='gr_bpm_container'
-                      >
-                        <Slider
-                          className='gr_bpm_bar'
-                          min={60}
-                          max={240}
-                          value={bpm}
-                          onChange={(e) => setBpm(e.target.value)}
+                      <div className='gr_metronome_container'>
+                        <Metronome
+                          volumen={1}
+                          playPauseStyle={{
+                            backgroundColor: `var(--youHaveAddedContainer)`,
+                            color: `var(--youHaveAddedText)`,
+                          }}
+                          bpmStyle={{
+                            color: `var(--welcomeTitle)`,
+                            fontFamily: [
+                              'Outfit',
+                              'Roboto',
+                              'Oxygen',
+                              'Ubuntu',
+                            ].join(','),
+                          }}
+                          bpmTagStyle={{
+                            color: `var(--welcomeTitle)`,
+                            opacity: '0.6',
+                            fontFamily: [
+                              'Plus Jakarta Sans',
+                              'Roboto',
+                              'Oxygen',
+                              'Ubuntu',
+                            ].join(','),
+                          }}
+                          plusStyle={{
+                            backgroundColor: `var(--youHaveAddedContainer)`,
+                            color: `var(--youHaveAddedText)`,
+                          }}
+                          minusStyle={{
+                            backgroundColor: `var(--youHaveAddedContainer)`,
+                            color: `var(--youHaveAddedText)`,
+                          }}
+                          handleStyle={{
+                            backgroundColor: `var(--youHaveAddedText)`,
+                            borderColor: `var(--youHaveAddedContainer)`,
+                          }}
+                          trackStyle={{
+                            backgroundColor: `var(--youHaveAddedContainer)`,
+                          }}
+                          railStyle={{
+                            backgroundColor: `var(--bpmBarHover)`,
+                          }}
                         />
-                      </Box>
-
-                      <Button
-                        variant='contained'
-                        fullWidth
-                        style={{ marginTop: '30px' }}
-                        className='gr_start_btn'
-                        onClick={() => setIsPlaying(!isPlaying)}
-                      >
-                        <Typography
-                          variant='h4'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
-                        >
-                          {isPlaying ? 'STOP' : 'START'}
-                        </Typography>
-                      </Button>
+                      </div>
                     </Box>
                   </>
                 </Container>
