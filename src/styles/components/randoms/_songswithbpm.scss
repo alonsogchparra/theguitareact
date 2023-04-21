@@ -3,7 +3,7 @@
 }
 
 .gr_info_text {
-  color: $grInfoText
+  color: $grInfoText;
 }
 
 .gr_text_bpm,
@@ -34,7 +34,21 @@ button.gr_start_btn {
   }
 }
 
-
 .gr_bpm_container .gr_bpm_bar span.MuiSlider-thumb:hover {
   box-shadow: 0px 0px 0px 8px var(--bpmBarHover);
+}
+
+// BPM INPUTS
+
+.MuiFormControl-root.gr_bpm_textfield .MuiInputBase-root::before {
+  border-color: $bpmInputColor;
+}
+
+.MuiFormControl-root.gr_bpm_textfield .MuiInputBase-root::after {
+  border-bottom: 2px solid $bpmInputSelected;
+}
+
+.MuiFormControl-root.gr_bpm_textfield
+  .MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary.MuiInputBase-fullWidth:hover::before {
+  border-bottom: 1px solid $bpmInputHover;
 }

@@ -70,6 +70,10 @@ export const themeSelection = {
       bpmBar: '#FEEA36',
       bpmBarHover: '#feea3629',
       grInfoText: '#1D1D1D',
+      // BPM Inputs
+      bpmInputColor: '#ffffff6b',
+      bpmInputSelected: '#FEEA36',
+      bpmInputHover: '#dcdcdc',
       // Random Videos
       videoExample: '#FEEA36',
       iconExample: '#FEEA36',
@@ -151,6 +155,10 @@ export const themeSelection = {
       bpmBar: '#1D1D1D',
       bpmBarHover: '#1D1D1D29',
       grInfoText: '#FEEA36',
+      // BPM Inputs
+      bpmInputColor: '#1D1D1D6b',
+      bpmInputSelected: '#1D1D1D',
+      bpmInputHover: '#1D1D1D',
       // Random Videos
       videoExample: '#1D1D1D',
       iconExample: '#1D1D1D',
@@ -234,6 +242,10 @@ export const themeSelection = {
       bpmBar: '#61DAFB',
       bpmBarHover: '#61DAFB29',
       grInfoText: '#10374A',
+      // BPM Inputs
+      bpmInputColor: '#61DAFB6b',
+      bpmInputSelected: '#61DAFB',
+      bpmInputHover: '#61DAFB',
       // Random Videos
       videoExample: '#61DAFB',
       iconExample: '#61DAFB',
@@ -315,6 +327,10 @@ export const themeSelection = {
       bpmBar: '#10374A',
       bpmBarHover: '#10374A29',
       grInfoText: '#DCDCDC',
+      // BPM Inputs
+      bpmInputColor: '#10374A6b',
+      bpmInputSelected: '#10374A',
+      bpmInputHover: '#10374A',
       // Random Videos
       videoExample: '#10374A',
       iconExample: '#10374A',
@@ -398,6 +414,10 @@ export const themeSelection = {
       bpmBar: '#FF3434',
       bpmBarHover: '#FF343429',
       grInfoText: '#4F0303',
+      // BPM Inputs
+      bpmInputColor: '#FF34346b',
+      bpmInputSelected: '#FF3434',
+      bpmInputHover: '#FF3434',
       // Random Videos
       videoExample: '#FF3434',
       iconExample: '#FF3434',
@@ -479,6 +499,10 @@ export const themeSelection = {
       bpmBar: '#4F0303',
       bpmBarHover: '#4F030329',
       grInfoText: '#FF3434',
+      // BPM Inputs
+      bpmInputColor: '#4F03036b',
+      bpmInputSelected: '#4F0303',
+      bpmInputHover: '#4F0303',
       // Random Videos
       videoExample: '#4F0303',
       iconExample: '#4F0303',
