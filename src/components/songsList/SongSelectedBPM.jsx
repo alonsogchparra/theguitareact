@@ -1,17 +1,22 @@
 import {
   Box,
-  Button,
   Container,
   createTheme,
   CssBaseline,
-  Slider,
   ThemeProvider,
   Typography,
+  TextField,
+  IconButton
 } from '@mui/material';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { useMetronome } from '../../hooks/useMetronome';
 import Grid from '@mui/material/Unstable_Grid2';
+import { useMetronome } from 'react-metronome-hook';
+import click1 from '../../media/sounds/click1.wav';
+import click2 from '../../media/sounds/click2.wav';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 let theme = createTheme({
   typography: {
@@ -39,9 +44,21 @@ export const SongSelectedBPM = () => {
     state: { artist, title, extraInfo },
   } = useLocation();
 
+  //----------- NEW BPM ---------------
+
+  const {
+    startMetronome,
+    isTicking,
+    stopMetronome,
+    bpm,
+    setBpm,
+    setBeatsPerMeasure,
+    setSounds,
+  } = useMetronome(120, 4, [click1, click2]);
+
   //----------- BPM ELEMENTS ---------------
 
-  const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
+  // const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
 
   // console.log('SONGSELECTEDBPM', useLocation());
 
@@ -149,46 +166,65 @@ export const SongSelectedBPM = () => {
                     </Box>
 
                     <Box width='100%' paddingTop={5}>
-                      <Typography
-                        variant='h4'
-                        component='div'
-                        textAlign='center'
-                        fontWeight='700'
-                        className='gr_text_bpm'
-                      >
-                        BPM: {bpm}
-                      </Typography>
-                      <Box
-                        width='100%'
-                        paddingTop={2}
-                        className='gr_bpm_container'
-                      >
-                        <Slider
-                          className='gr_bpm_bar'
-                          min={60}
-                          max={240}
-                          value={bpm}
+                      <div>
+                        <TextField
+                          id='song-title'
+                          label='BPM'
+                          variant='standard'
+                          fullWidth
+                          margin='normal'
+                          autoComplete='off'
+                          name='title'
+                          // value={title}
+                          className='gr_bpm_textfield'
                           onChange={(e) => setBpm(e.target.value)}
+                          placeholder='Change BPM'
+                          type='number'
                         />
-                      </Box>
-
-                      <Button
-                        variant='contained'
-                        fullWidth
-                        style={{ marginTop: '30px' }}
-                        className='gr_start_btn'
-                        onClick={() => setIsPlaying(!isPlaying)}
-                      >
-                        <Typography
-                          variant='h4'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
+                        <TextField
+                          id='song-title'
+                          label='Beats per measure'
+                          variant='standard'
+                          fullWidth
+                          margin='normal'
+                          autoComplete='off'
+                          name='title'
+                          // value={title}
+                          className='gr_bpm_textfield'
+                          onChange={(e) => setBeatsPerMeasure(e.target.value)}
+                          placeholder='Change beats per measure'
+                          type='number'
+                        />
+                        <Grid
+                          display='flex'
+                          justifyContent='center'
+                          paddingY={2}
                         >
-                          {isPlaying ? 'STOP' : 'START'}
-                        </Typography>
-                      </Button>
+                          <IconButton
+                            onClick={isTicking ? stopMetronome : startMetronome}
+                          >
+                            {isTicking ? (
+                              <PauseCircleIcon
+                                style={{ width: '3rem', height: '3rem' }}
+                                className='gr_song_action'
+                              />
+                            ) : (
+                              <PlayCircleIcon
+                                style={{ width: '3rem', height: '3rem' }}
+                                className='gr_song_action'
+                              />
+                            )}
+                          </IconButton>
+                          <IconButton
+                            onClick={() => setSounds([click2, click1])}
+                          >
+                            <ChangeCircleIcon
+                              style={{ width: '3rem', height: '3rem' }}
+                              className='gr_song_action'
+                            />
+                          </IconButton>
+                        </Grid>
+                      </div>
                     </Box>
                   </>
                 </Container>
