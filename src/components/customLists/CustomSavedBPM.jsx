@@ -5,15 +5,21 @@ import {
   Container,
   createTheme,
   CssBaseline,
+  IconButton,
   responsiveFontSizes,
-  Slider,
+  TextField,
   ThemeProvider,
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useSelector } from 'react-redux';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { songsList, titleList } from '../../features/songs/songsSavedSlice';
-import { useMetronome } from '../../hooks/useMetronome';
+import { useMetronome } from 'react-metronome-hook';
+import click1 from '../../media/sounds/click1.wav';
+import click2 from '../../media/sounds/click2.wav';
 
 let theme = createTheme({
   typography: {
@@ -48,9 +54,17 @@ export const CustomSavedBPM = () => {
   const [counter, setCounter] = useState(0);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
 
-  //----------- BPM ELEMENTS ---------------
+  //----------- NEW BPM ---------------
 
-  const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
+  const {
+    startMetronome,
+    isTicking,
+    stopMetronome,
+    bpm,
+    setBpm,
+    setBeatsPerMeasure,
+    setSounds,
+  } = useMetronome(120, 4, [click1, click2]);
 
   const getRandomNumber = (min, max) => {
     let stepOne = max - min;
@@ -77,6 +91,9 @@ export const CustomSavedBPM = () => {
   };
 
   const startOver = () => {
+    if (isTicking) {
+      stopMetronome();
+    }
     setMusicList(copyMusicList);
     setCounter(0);
     setMusicItem('');
@@ -116,7 +133,7 @@ export const CustomSavedBPM = () => {
 
                 <Box width='100%' paddingTop={2}>
                   <Typography
-                    variant='h4'
+                    variant='h5'
                     component='div'
                     textAlign='center'
                     className='gr_welcome_title'
@@ -210,52 +227,73 @@ export const CustomSavedBPM = () => {
                         </Typography>
                       </Box>
 
-                      <Box width='100%' paddingTop={5}>
-                        <Typography
-                          variant='h4'
-                          component='div'
-                          textAlign='center'
-                          fontWeight='700'
-                          className='gr_text_bpm'
-                        >
-                          BPM: {bpm}
-                        </Typography>
-                        <Box
-                          width='100%'
-                          paddingTop={2}
-                          className='gr_bpm_container'
-                        >
-                          <Slider
-                            className='gr_bpm_bar'
-                            min={60}
-                            max={240}
-                            value={bpm}
+                      <Box width='100%' paddingTop={1}>
+                        <div>
+                          <TextField
+                            id='song-title'
+                            label='BPM'
+                            variant='standard'
+                            fullWidth
+                            margin='normal'
+                            autoComplete='off'
+                            name='title'
+                            // value={title}
+                            className='gr_bpm_textfield'
                             onChange={(e) => setBpm(e.target.value)}
+                            placeholder='Change BPM'
+                            type='number'
                           />
-                        </Box>
-
-                        <Button
-                          variant='contained'
-                          fullWidth
-                          style={{ marginTop: '30px' }}
-                          className='gr_start_btn'
-                          onClick={() => setIsPlaying(!isPlaying)}
-                        >
-                          <Typography
-                            variant='h4'
-                            component='div'
-                            textAlign='center'
-                            fontFamily='Outfit'
-                            fontWeight='700'
+                          <TextField
+                            id='song-title'
+                            label='Beats per measure'
+                            variant='standard'
+                            fullWidth
+                            margin='normal'
+                            autoComplete='off'
+                            name='title'
+                            // value={title}
+                            className='gr_bpm_textfield'
+                            onChange={(e) => setBeatsPerMeasure(e.target.value)}
+                            placeholder='Change beats per measure'
+                            type='number'
+                          />
+                          <Grid
+                            display='flex'
+                            justifyContent='center'
+                            paddingY={2}
                           >
-                            {isPlaying ? 'STOP' : 'START'}
-                          </Typography>
-                        </Button>
+                            <IconButton
+                              onClick={
+                                isTicking ? stopMetronome : startMetronome
+                              }
+                            >
+                              {isTicking ? (
+                                <PauseCircleIcon
+                                  style={{ width: '3rem', height: '3rem' }}
+                                  className='gr_song_action'
+                                />
+                              ) : (
+                                <PlayCircleIcon
+                                  style={{ width: '3rem', height: '3rem' }}
+                                  className='gr_song_action'
+                                />
+                              )}
+                            </IconButton>
+                            <IconButton
+                              onClick={() => setSounds([click2, click1])}
+                            >
+                              <ChangeCircleIcon
+                                style={{ width: '3rem', height: '3rem' }}
+                                className='gr_song_action'
+                              />
+                            </IconButton>
+                          </Grid>
+                        </div>
                       </Box>
                     </>
                   )}
 
-                  <Box width='100%' marginTop={10}>
+                  <Box width='100%' marginTop={2}>
                     {!musicItem && (
                       <Typography
                         component='div'
