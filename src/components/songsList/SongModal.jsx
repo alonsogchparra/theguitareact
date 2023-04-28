@@ -20,6 +20,8 @@ export const SongModal = ({
   id,
   openModal,
   title,
+  beatPerMinute,
+  beatsPerMeasure,
 }) => {
   return (
     <>
@@ -94,6 +96,8 @@ export const SongModal = ({
                         artist,
                         title,
                         extraInfo,
+                        beatPerMinute,
+                        beatsPerMeasure,
                       }}
                     >
                       <Box className='gr_box_options_modal'>
