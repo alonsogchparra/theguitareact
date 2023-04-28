@@ -6,9 +6,9 @@ import {
   ThemeProvider,
   Typography,
   TextField,
-  IconButton
+  IconButton,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useMetronome } from 'react-metronome-hook';
@@ -41,7 +41,13 @@ let theme = createTheme({
 
 export const SongSelectedBPM = () => {
   const {
-    state: { artist, title, extraInfo },
+    state: {
+      artist,
+      title,
+      extraInfo,
+      beatPerMinute = 120,
+      beatsPerMeasure: beatsPM = 4,
+    },
   } = useLocation();
 
   //----------- NEW BPM ---------------
@@ -56,11 +62,31 @@ export const SongSelectedBPM = () => {
     setSounds,
   } = useMetronome(120, 4, [click1, click2]);
 
+  const [addBPM, setAddBPM] = useState(beatPerMinute);
+  const [addBeatsPM, setAddBeatsPM] = useState(beatsPM);
+
+  const regex = /^[0-9\b]+$/;
+
   //----------- BPM ELEMENTS ---------------
 
   // const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
 
   // console.log('SONGSELECTEDBPM', useLocation());
+
+  const changeBPMHandler = (e) => {
+    if (e.target.value === '' || regex.test(e.target.value)) {
+      if (e.target.name === 'bpm') {
+        setAddBPM(e.target.value);
+      } else {
+        setAddBeatsPM(e.target.value);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setBpm(addBPM);
+    setBeatsPerMeasure(addBeatsPM);
+  }, [addBPM, addBeatsPM]);
 
   return (
     <>
@@ -125,6 +151,10 @@ export const SongSelectedBPM = () => {
                     textAlign='center'
                     className='gr_add_song_title'
                     paddingTop={3}
+                    style={{
+                        whiteSpace: 'pre-line',
+                        verticalAlign: 'bottom',
+                      }}
                   >
                     {extraInfo}
                   </Typography>
@@ -174,10 +204,10 @@ export const SongSelectedBPM = () => {
                           fullWidth
                           margin='normal'
                           autoComplete='off'
-                          name='title'
-                          // value={title}
+                          name='bpm'
+                          value={addBPM}
                           className='gr_bpm_textfield'
-                          onChange={(e) => setBpm(e.target.value)}
+                          onChange={(e) => changeBPMHandler(e)}
                           placeholder='Change BPM'
                           type='number'
                         />
@@ -188,10 +218,10 @@ export const SongSelectedBPM = () => {
                           fullWidth
                           margin='normal'
                           autoComplete='off'
-                          name='title'
-                          // value={title}
+                          name='bpmeasure'
+                          value={addBeatsPM}
                           className='gr_bpm_textfield'
-                          onChange={(e) => setBeatsPerMeasure(e.target.value)}
+                          onChange={(e) => changeBPMHandler(e)}
                           placeholder='Change beats per measure'
                           type='number'
                         />

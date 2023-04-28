@@ -56,6 +56,10 @@ export const SongsWithBPM = () => {
   const [musicItem, setMusicItem] = useState('');
   const [counter, setCounter] = useState(0);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
+  const [addBPM, setAddBPM] = useState(120);
+  const [addBeatsPM, setAddBeatsPM] = useState(4);
+
+  const regex = /^[0-9\b]+$/;
 
   //----------- NEW BPM ---------------
 
@@ -94,6 +98,23 @@ export const SongsWithBPM = () => {
 
       setMusicItem(randomSong);
       setCounter(counter + 1);
+
+      setAddBPM(
+        randomSong?.beat_per_minute ? randomSong?.beat_per_minute : 120
+      );
+      setAddBeatsPM(
+        randomSong?.beats_per_measure ? randomSong?.beats_per_measure : 4
+      );
+    }
+  };
+
+  const changeBPMHandler = (e) => {
+    if (e.target.value === '' || regex.test(e.target.value)) {
+      if (e.target.name === 'bpm') {
+        setAddBPM(e.target.value);
+      } else {
+        setAddBeatsPM(e.target.value);
+      }
     }
   };
 
@@ -111,16 +132,32 @@ export const SongsWithBPM = () => {
     if (songs) {
       let tempSongs = songs
         .filter((song) => song.uid === user.uid)
-        .map(({ id, artist, title, extraInfo }) => ({
-          id,
-          artist,
-          title,
-          extraInfo,
-        }));
+        .map(
+          ({
+            id,
+            artist,
+            title,
+            extraInfo,
+            beat_per_minute,
+            beats_per_measure,
+          }) => ({
+            id,
+            artist,
+            title,
+            extraInfo,
+            beat_per_minute,
+            beats_per_measure,
+          })
+        );
       setMusicList(tempSongs);
       setCopyMusicList(tempSongs);
     }
   }, [songs, user.uid]);
+
+  useEffect(() => {
+    setBpm(addBPM);
+    setBeatsPerMeasure(addBeatsPM);
+  }, [addBPM, addBeatsPM]);
 
   // console.log('SONGS BPM', songs);
   // console.log('USER', user);
@@ -212,6 +249,10 @@ export const SongsWithBPM = () => {
                       textAlign='center'
                       className='gr_add_song_title'
                       paddingTop={3}
+                      style={{
+                        whiteSpace: 'pre-line',
+                        verticalAlign: 'bottom',
+                      }}
                     >
                       {musicItem?.extraInfo}
                     </Typography>
@@ -267,10 +308,10 @@ export const SongsWithBPM = () => {
                               fullWidth
                               margin='normal'
                               autoComplete='off'
-                              name='title'
-                              // value={title}
+                              name='bpm'
+                              value={addBPM}
                               className='gr_bpm_textfield'
-                              onChange={(e) => setBpm(e.target.value)}
+                              onChange={(e) => changeBPMHandler(e)}
                               placeholder='Change BPM'
                               type='number'
                             />
@@ -281,12 +322,10 @@ export const SongsWithBPM = () => {
                               fullWidth
                               margin='normal'
                               autoComplete='off'
-                              name='title'
-                              // value={title}
+                              name='bpmeasure'
+                              value={addBeatsPM}
                               className='gr_bpm_textfield'
-                              onChange={(e) =>
-                                setBeatsPerMeasure(e.target.value)
-                              }
+                              onChange={(e) => changeBPMHandler(e)}
                               placeholder='Change beats per measure'
                               type='number'
                             />
