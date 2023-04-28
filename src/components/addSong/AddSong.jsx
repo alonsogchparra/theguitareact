@@ -44,6 +44,8 @@ export const AddSong = () => {
     title: '',
     artist: '',
     extraInfo: '',
+    beat_per_minute: 0,
+    beats_per_measure: 4,
     uid,
     displayName: displayName,
   });
@@ -56,7 +58,7 @@ export const AddSong = () => {
   const { data: song } = useFetchSongQuery(id ? id : skipToken);
   const [updateSong] = useUpdateSongMutation();
 
-  const { title, artist, extraInfo } = data;
+  const { title, artist, extraInfo, beat_per_minute, beats_per_measure } = data;
 
   const handleChange = (e) => {
     setData({
@@ -128,6 +130,33 @@ export const AddSong = () => {
                   value={artist}
                   className='gr_email_input'
                   onChange={handleChange}
+                />
+                <TextField
+                  id='artist-name'
+                  label='Beat Per Minute (Optional)'
+                  variant='standard'
+                  fullWidth
+                  margin='normal'
+                  autoComplete='off'
+                  name='beat_per_minute'
+                  value={beat_per_minute}
+                  className='gr_email_input'
+                  onChange={handleChange}
+                  InputLabelProps={{shrink: true}}
+
+                />
+                <TextField
+                  id='artist-name'
+                  label='Beats per measure (Optional)'
+                  variant='standard'
+                  fullWidth
+                  margin='normal'
+                  autoComplete='off'
+                  name='beats_per_measure'
+                  value={beats_per_measure}
+                  className='gr_email_input'
+                  onChange={handleChange}
+                  InputLabelProps={{shrink: true}}
                 />
                 <TextField
                   id='additional-info'
