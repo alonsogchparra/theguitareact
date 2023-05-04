@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { songsList, titleList } from '../../features/songs/songsSavedSlice';
 import { useMetronome } from 'react-metronome-hook';
 import click1 from '../../media/sounds/click1.wav';
@@ -53,6 +55,10 @@ export const CustomSavedBPM = () => {
   const [musicItem, setMusicItem] = useState('');
   const [counter, setCounter] = useState(0);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
+  const [addBPM, setAddBPM] = useState(120);
+  const [addBeatsPM, setAddBeatsPM] = useState(4);
+
+  const regex = /^[0-9\b]+$/;
 
   //----------- NEW BPM ---------------
 
@@ -87,6 +93,23 @@ export const CustomSavedBPM = () => {
 
       setMusicItem(randomSong);
       setCounter(counter + 1);
+
+      setAddBPM(
+        randomSong?.beat_per_minute ? randomSong?.beat_per_minute : 120
+      );
+      setAddBeatsPM(
+        randomSong?.beats_per_measure ? randomSong?.beats_per_measure : 4
+      );
+    }
+  };
+
+  const changeBPMHandler = (e) => {
+    if (e.target.value === '' || regex.test(e.target.value)) {
+      if (e.target.name === 'bpm') {
+        setAddBPM(e.target.value);
+      } else {
+        setAddBeatsPM(e.target.value);
+      }
     }
   };
 
@@ -106,6 +129,11 @@ export const CustomSavedBPM = () => {
       setCopyMusicList(listSongs);
     }
   }, []);
+
+  useEffect(() => {
+    setBpm(addBPM);
+    setBeatsPerMeasure(addBeatsPM);
+  }, [addBPM, addBeatsPM]);
 
   return (
     <>
@@ -168,20 +196,36 @@ export const CustomSavedBPM = () => {
                 }}
               >
                 <Box width='100%'>
-                  <Typography
-                    component='div'
-                    variant='h4'
-                    textAlign='center'
-                    className='gr_add_song_title'
-                  >
-                    <strong>Extra Info:</strong>
-                  </Typography>
+                  <Container maxWidth='sm' style={{ paddingTop: '40px' }}>
+                    <>
+                      <Box
+                        width='100%'
+                        paddingY={3.4}
+                        className='gr_song_info_box'
+                      >
+                        <Typography
+                          variant='h4'
+                          component='div'
+                          textAlign='center'
+                          fontWeight='700'
+                          className='gr_info_text'
+                        >
+                          Extra Info:
+                        </Typography>
+                      </Box>
+                    </>
+                  </Container>
+
                   <Typography
                     component='div'
                     variant='h4'
                     textAlign='center'
                     className='gr_add_song_title'
                     paddingTop={3}
+                    style={{
+                      whiteSpace: 'pre-line',
+                      verticalAlign: 'bottom',
+                    }}
                   >
                     {musicItem?.extraInfo}
                   </Typography>
@@ -237,9 +281,9 @@ export const CustomSavedBPM = () => {
                             margin='normal'
                             autoComplete='off'
                             name='title'
-                            // value={title}
+                            value={addBPM}
                             className='gr_bpm_textfield'
-                            onChange={(e) => setBpm(e.target.value)}
+                            onChange={(e) => changeBPMHandler(e)}
                             placeholder='Change BPM'
                             type='number'
                           />
@@ -251,9 +295,9 @@ export const CustomSavedBPM = () => {
                             margin='normal'
                             autoComplete='off'
                             name='title'
-                            // value={title}
+                            value={addBeatsPM}
                             className='gr_bpm_textfield'
-                            onChange={(e) => setBeatsPerMeasure(e.target.value)}
+                            onChange={(e) => changeBPMHandler(e)}
                             placeholder='Change beats per measure'
                             type='number'
                           />
@@ -326,19 +370,57 @@ export const CustomSavedBPM = () => {
                         copyMusicList.length === counter ? startOver : getSong
                       }
                     >
-                      <Typography
-                        variant='h4'
-                        component='div'
-                        textAlign='center'
-                        fontFamily='Outfit'
-                        fontWeight='700'
-                      >
-                        {copyMusicList.length === counter
-                          ? 'PLAY AGAIN'
-                          : isButtonPressed
-                          ? 'NEXT'
-                          : 'PLAY'}
-                      </Typography>
+                      <Box width='100%'>
+                        <Grid
+                          container
+                          display='flex'
+                          flexDirection='row'
+                          style={{ paddingTop: 7, paddingBottom: 7 }}
+                        >
+                          <Grid
+                            display='flex'
+                            justifyContent='center'
+                            alignItems='center'
+                            // margin='auto'
+                            flex={1}
+                          >
+                            <Typography
+                              variant='h4'
+                              component='div'
+                              textAlign='center'
+                              fontFamily='Outfit'
+                              fontWeight='700'
+                            >
+                              {copyMusicList.length === counter
+                                ? 'PLAY AGAIN'
+                                : isButtonPressed
+                                ? 'NEXT'
+                                : 'PLAY THE BEAT'}
+                            </Typography>
+                          </Grid>
+
+                          <Grid
+                            display='flex'
+                            justifyContent='flex-start'
+                            alignItems='center'
+                            padding={0}
+                          >
+                            {copyMusicList.length === counter ? (
+                              <PlayCircleOutlineIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            ) : isButtonPressed ? (
+                              <SkipNextIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            ) : (
+                              <PlayCircleOutlineIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            )}
+                          </Grid>
+                        </Grid>
+                      </Box>
                     </Button>
                   </Box>
                 </Container>
