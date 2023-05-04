@@ -16,7 +16,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import { selectUser } from '../../features/auth/userSlice';
 import { useSelector } from 'react-redux';
-// import { useMetronome } from '../../hooks/useMetronome';
 import { LoadingAll } from '../layouts/LoadingAll';
 import { useMetronome } from 'react-metronome-hook';
 import click1 from '../../media/sounds/click1.wav';
@@ -72,10 +71,6 @@ export const SongsWithBPM = () => {
     setBeatsPerMeasure,
     setSounds,
   } = useMetronome(120, 4, [click1, click2]);
-
-  //----------- BPM ELEMENTS ---------------
-
-  // const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
 
   const getRandomNumber = (min, max) => {
     let stepOne = max - min;
@@ -235,14 +230,26 @@ export const SongsWithBPM = () => {
                   }}
                 >
                   <Box width='100%'>
-                    <Typography
-                      component='div'
-                      variant='h4'
-                      textAlign='center'
-                      className='gr_add_song_title'
-                    >
-                      <strong>Extra Info:</strong>
-                    </Typography>
+                    <Container maxWidth='sm' style={{ paddingTop: '40px' }}>
+                      <>
+                        <Box
+                          width='100%'
+                          paddingY={3.4}
+                          className='gr_song_info_box'
+                        >
+                          <Typography
+                            variant='h4'
+                            component='div'
+                            textAlign='center'
+                            fontWeight='700'
+                            className='gr_info_text'
+                          >
+                            Extra Info:
+                          </Typography>
+                        </Box>
+                      </>
+                    </Container>
+
                     <Typography
                       component='div'
                       variant='h4'

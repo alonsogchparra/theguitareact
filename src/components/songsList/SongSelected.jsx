@@ -8,6 +8,7 @@ import {
   Container,
   createTheme,
   CssBaseline,
+  Divider,
   responsiveFontSizes,
   ThemeProvider,
   Typography,
@@ -124,26 +125,32 @@ export const SongSelected = () => {
                 {title}
               </Typography>
             </Box> */}
-            <Container maxWidth='sm' sx={{ paddingTop: 2 }}>
-              <Box width='100%' paddingY={2} className='gr_song_info_box'>
+            <Container maxWidth='xl' sx={{ paddingTop: 2 }}>
+              <Box width='100%' paddingY={2}>
+                <Divider
+                  className='gr_song_selected_divider'
+                  style={{
+                    marginBottom: '1rem',
+                    borderColor: 'var(--bgAddSongBtn)',
+                  }}
+                />
                 <Typography
                   variant='h5'
                   component='div'
                   textAlign='center'
-                  fontWeight='700'
-                  className='gr_info_text'
+                  className='gr_welcome_title'
                 >
-                  Song: {title}
+                  <strong>Song: </strong>
+                  {title} <br />
+                  <strong>Artist/Band: </strong> {artist}
                 </Typography>
-                <Typography
-                  variant='h5'
-                  component='div'
-                  textAlign='center'
-                  fontWeight='700'
-                  className='gr_info_text'
-                >
-                  Artist/Band: {artist}
-                </Typography>
+                <Divider
+                  className='gr_divider_title'
+                  style={{
+                    marginTop: '1rem',
+                    borderColor: 'var(--bgAddSongBtn)',
+                  }}
+                />
               </Box>
             </Container>
           </Grid>
@@ -189,6 +196,10 @@ export const SongSelected = () => {
                     textAlign='center'
                     className='gr_add_song_title'
                     paddingTop={3}
+                    style={{
+                      whiteSpace: 'pre-line',
+                      verticalAlign: 'bottom',
+                    }}
                   >
                     {extraInfo}
                   </Typography>
