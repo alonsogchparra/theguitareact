@@ -67,10 +67,6 @@ export const SongSelectedBPM = () => {
 
   const regex = /^[0-9\b]+$/;
 
-  //----------- BPM ELEMENTS ---------------
-
-  // const { bpm, setBpm, isPlaying, setIsPlaying } = useMetronome();
-
   // console.log('SONGSELECTEDBPM', useLocation());
 
   const changeBPMHandler = (e) => {
@@ -137,14 +133,25 @@ export const SongSelectedBPM = () => {
                 }}
               >
                 <Box width='100%'>
-                  <Typography
-                    component='div'
-                    variant='h4'
-                    textAlign='center'
-                    className='gr_add_song_title'
-                  >
-                    <strong>Extra Info:</strong>
-                  </Typography>
+                  <Container maxWidth='sm' style={{ paddingTop: '40px' }}>
+                    <>
+                      <Box
+                        width='100%'
+                        paddingY={3.4}
+                        className='gr_song_info_box'
+                      >
+                        <Typography
+                          variant='h4'
+                          component='div'
+                          textAlign='center'
+                          fontWeight='700'
+                          className='gr_info_text'
+                        >
+                          Extra Info:
+                        </Typography>
+                      </Box>
+                    </>
+                  </Container>
                   <Typography
                     component='div'
                     variant='h4'
@@ -152,9 +159,9 @@ export const SongSelectedBPM = () => {
                     className='gr_add_song_title'
                     paddingTop={3}
                     style={{
-                        whiteSpace: 'pre-line',
-                        verticalAlign: 'bottom',
-                      }}
+                      whiteSpace: 'pre-line',
+                      verticalAlign: 'bottom',
+                    }}
                   >
                     {extraInfo}
                   </Typography>
