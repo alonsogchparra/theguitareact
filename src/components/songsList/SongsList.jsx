@@ -78,7 +78,15 @@ export const SongsList = () => {
 
   const navigate = useNavigate();
 
-  const addSongTemporalHandler = (id, uid, artist, title, extraInfo = '') => {
+  const addSongTemporalHandler = (
+    id,
+    uid,
+    artist,
+    title,
+    extraInfo = '',
+    beatPerMinute,
+    beatsPerMeasure
+  ) => {
     dispatch(
       addTemporalSongs({
         id,
@@ -86,6 +94,8 @@ export const SongsList = () => {
         artist,
         title,
         extraInfo,
+        beat_per_minute: beatPerMinute,
+        beats_per_measure: beatsPerMeasure,
       })
     );
   };
@@ -94,13 +104,22 @@ export const SongsList = () => {
     setOpenModal(true);
   };
 
-  const openModalHandler = (artist, title, extraInfo = '', id) => {
+  const openModalHandler = (
+    artist,
+    title,
+    extraInfo = '',
+    id,
+    beatPerMinute,
+    beatsPerMeasure
+  ) => {
     setOpenModal(true);
     setSongSelected({
       artist,
       title,
       extraInfo,
       id,
+      beat_per_minute: beatPerMinute,
+      beats_per_measure: beatsPerMeasure,
     });
   };
 
@@ -219,6 +238,7 @@ export const SongsList = () => {
   // console.log('songsTempList', songsTempList);
   // console.log('LOCAL SONGS', localSongs);
   // console.log('SONGS', songs);
+  // console.log('songSelected', songSelected);
 
   return (
     <>
@@ -353,6 +373,8 @@ export const SongsList = () => {
                         uid={song.uid}
                         extraInfo={song?.extraInfo}
                         added={song.added}
+                        beatPerMinute={song?.beat_per_minute}
+                        beatsPerMeasure={song?.beats_per_measure}
                         handleOpenModal={handleOpenModal}
                         openModalHandler={openModalHandler}
                         handleCloseModal={handleCloseModal}
@@ -444,6 +466,8 @@ export const SongsList = () => {
             id={songSelected.id}
             openModal={openModal}
             title={songSelected.title}
+            beatPerMinute={songSelected?.beat_per_minute}
+            beatsPerMeasure={songSelected?.beats_per_measure}
           />
 
           {/* Modal */}

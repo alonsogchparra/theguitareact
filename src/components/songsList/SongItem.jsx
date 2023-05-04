@@ -21,14 +21,13 @@ import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite
 import CancelIcon from '@mui/icons-material/Cancel';
 
 export const SongItem = ({
-  song: { title, displayName, artist, timestamp, id, extraInfo},
+  song: { title, displayName, artist, timestamp, id, extraInfo },
   uid,
   added,
-  openModal,
-  handleCloseModal,
-  handleOpenModal,
   openModalHandler,
   addSongTemporalHandler,
+  beatPerMinute,
+  beatsPerMeasure,
 }) => {
   const user = useSelector(selectUser);
   const [deleteSong] = useDeleteSongMutation();
@@ -63,7 +62,16 @@ export const SongItem = ({
               </Typography>
               {/* <Link to={`/song/${id}`} state={{ artist, title, extraInfo }}> */}
               <IconButton
-                onClick={() => openModalHandler(artist, title, extraInfo, id)}
+                onClick={() =>
+                  openModalHandler(
+                    artist,
+                    title,
+                    extraInfo,
+                    id,
+                    beatPerMinute,
+                    beatsPerMeasure
+                  )
+                }
               >
                 <PlayCircleOutlineIcon
                   style={{ width: '3.5rem', height: '3.5rem' }}
@@ -109,7 +117,15 @@ export const SongItem = ({
               </Link>
               <IconButton
                 onClick={() =>
-                  addSongTemporalHandler(id, uid, artist, title, extraInfo)
+                  addSongTemporalHandler(
+                    id,
+                    uid,
+                    artist,
+                    title,
+                    extraInfo,
+                    beatPerMinute,
+                    beatsPerMeasure
+                  )
                 }
                 disabled={added}
               >
