@@ -23,6 +23,8 @@ import click2 from '../../media/sounds/click2.wav';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 let theme = createTheme({
   typography: {
@@ -405,19 +407,56 @@ export const SongsWithBPM = () => {
                           copyMusicList.length === counter ? startOver : getSong
                         }
                       >
-                        <Typography
-                          variant='h4'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
-                        >
-                          {copyMusicList.length === counter
-                            ? 'PLAY AGAIN'
-                            : isButtonPressed
-                            ? 'NEXT'
-                            : 'PLAY'}
-                        </Typography>
+                        <Box width='100%'>
+                          <Grid
+                            container
+                            display='flex'
+                            flexDirection='row'
+                            style={{ paddingTop: 7, paddingBottom: 7 }}
+                          >
+                            <Grid
+                              display='flex'
+                              justifyContent='center'
+                              alignItems='center'
+                              flex='1'
+                            >
+                              <Typography
+                                variant='h4'
+                                component='div'
+                                textAlign='center'
+                                fontFamily='Outfit'
+                                fontWeight='700'
+                              >
+                                {copyMusicList.length === counter
+                                  ? 'PLAY AGAIN'
+                                  : isButtonPressed
+                                  ? 'NEXT'
+                                  : 'PLAY THE BEAT'}
+                              </Typography>
+                            </Grid>
+
+                            <Grid
+                              display='flex'
+                              justifyContent='flex-start'
+                              alignItems='center'
+                              padding={0}
+                            >
+                              {copyMusicList.length === counter ? (
+                                <PlayCircleOutlineIcon
+                                  style={{ width: '2.5rem', height: '2.5rem' }}
+                                />
+                              ) : isButtonPressed ? (
+                                <SkipNextIcon
+                                  style={{ width: '2.5rem', height: '2.5rem' }}
+                                />
+                              ) : (
+                                <PlayCircleOutlineIcon
+                                  style={{ width: '2.5rem', height: '2.5rem' }}
+                                />
+                              )}
+                            </Grid>
+                          </Grid>
+                        </Box>
                       </Button>
                     </Box>
                   </Container>
