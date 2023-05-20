@@ -17,6 +17,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useLocation } from 'react-router-dom';
 import youtube from '../../api/youtube';
 import { key } from '../../keys/youtube';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 
 let theme = createTheme({
   typography: {
@@ -229,15 +230,39 @@ export const SongSelected = () => {
                         className='gr_start_btn'
                         onClick={() => setVideoType('original')}
                       >
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
-                        >
-                          Original
-                        </Typography>
+                        <Box width='100%'>
+                          <Grid container display='flex' flexDirection='row'>
+                            <Grid
+                              display='flex'
+                              justifyContent='center'
+                              alignItems='center'
+                              flex={1}
+                            >
+                              <Typography
+                                variant='body1'
+                                component='div'
+                                textAlign='center'
+                                fontFamily='Outfit'
+                                fontWeight='700'
+                                sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
+                              >
+                                Original
+                              </Typography>
+                            </Grid>
+                            <Grid
+                              justifyContent='flex-start'
+                              alignItems='center'
+                              sx={{ display: { xs: 'none', lg: 'flex' } }}
+                            >
+                              <OndemandVideoIcon
+                                style={{
+                                  width: '1.2rem',
+                                  height: '1.2rem',
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Box>
                       </Button>
                       <Button
                         variant='contained'
@@ -245,15 +270,39 @@ export const SongSelected = () => {
                         className='gr_start_btn'
                         onClick={() => setVideoType('backing')}
                       >
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
-                        >
-                          Backing Track
-                        </Typography>
+                        <Box width='100%'>
+                          <Grid container display='flex' flexDirection='row'>
+                            <Grid
+                              display='flex'
+                              justifyContent='center'
+                              alignItems='center'
+                              flex={1}
+                            >
+                              <Typography
+                                variant='body1'
+                                component='div'
+                                textAlign='center'
+                                fontFamily='Outfit'
+                                fontWeight='700'
+                                sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
+                              >
+                                Backing Track
+                              </Typography>
+                            </Grid>
+                            <Grid
+                              justifyContent='flex-start'
+                              alignItems='center'
+                              sx={{ display: { xs: 'none', lg: 'flex' } }}
+                            >
+                              <OndemandVideoIcon
+                                style={{
+                                  width: '1.2rem',
+                                  height: '1.2rem',
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Box>
                       </Button>
                       <Button
                         variant='contained'
@@ -261,15 +310,39 @@ export const SongSelected = () => {
                         className='gr_start_btn'
                         onClick={() => setVideoType('live')}
                       >
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          textAlign='center'
-                          fontFamily='Outfit'
-                          fontWeight='700'
-                        >
-                          Live
-                        </Typography>
+                        <Box width='100%'>
+                          <Grid container display='flex' flexDirection='row'>
+                            <Grid
+                              display='flex'
+                              justifyContent='center'
+                              alignItems='center'
+                              flex={1}
+                            >
+                              <Typography
+                                variant='body1'
+                                component='div'
+                                textAlign='center'
+                                fontFamily='Outfit'
+                                fontWeight='700'
+                                sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
+                              >
+                                Live
+                              </Typography>
+                            </Grid>
+                            <Grid
+                              justifyContent='flex-start'
+                              alignItems='center'
+                              sx={{ display: { xs: 'none', lg: 'flex' } }}
+                            >
+                              <OndemandVideoIcon
+                                style={{
+                                  width: '1.2rem',
+                                  height: '1.2rem',
+                                }}
+                              />
+                            </Grid>
+                          </Grid>
+                        </Box>
                       </Button>
                     </Grid>
                   </Box>
