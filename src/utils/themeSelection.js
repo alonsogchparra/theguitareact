@@ -193,7 +193,7 @@ export const themeSelection = {
       optionColor: '#61DAFB',
       // Dashboard
       welcomeTitle: '#DCDCDC',
-      youHaveAddedContainer: '#DCDCDC',
+      youHaveAddedContainer: '#61DAFB',
       youHaveAddedText: '#10374A',
       borderColorChoice: '#DCDCDC',
       iconChoiceColor: '#61DAFB',
