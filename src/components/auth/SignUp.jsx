@@ -35,6 +35,9 @@ let theme = createTheme({
       fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
       fontWeight: 700,
     },
+    body1: {
+      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
+    },
   },
 });
 
@@ -45,6 +48,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSignUpWrong, setIsSignUpWrong] = useState(false);
 
   const [showHidePwd, setShowHidePwd] = useState(false);
   const [showHideConPwd, setShowHideConPwd] = useState(false);
@@ -64,29 +68,40 @@ export const SignUp = () => {
   const signUpHandler = (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userAuth) => {
-        updateProfile(userAuth.user, {
-          displayName: fullname,
+    if (password !== confirmPassword) {
+      setIsSignUpWrong(true);
+    } else {
+      setIsSignUpWrong(false);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userAuth) => {
+          updateProfile(userAuth.user, {
+            displayName: fullname,
+          })
+            .then(
+              ({
+                userAuth: {
+                  user: { email, uid },
+                },
+              }) => {
+                dispatch(
+                  login({
+                    email,
+                    uid,
+                    displayName: fullname,
+                  })
+                );
+              }
+            )
+            .catch((err) => {
+              console.log('user not updated', err);
+              setIsSignUpWrong(true);
+            });
         })
-          .then(
-            ({
-              userAuth: {
-                user: { email, uid },
-              },
-            }) => {
-              dispatch(
-                login({
-                  email,
-                  uid,
-                  displayName: fullname,
-                })
-              );
-            }
-          )
-          .catch((err) => console.log('user not updated', err));
-      })
-      .catch((err) => console.log('ERROR CREATING USER', err));
+        .catch((err) => {
+          console.log('ERROR CREATING USER', err);
+          setIsSignUpWrong(true);
+        });
+    }
   };
 
   return (
@@ -95,16 +110,18 @@ export const SignUp = () => {
         <CssBaseline />
         <Container maxWidth='sm' className='animate__animated animate__fadeIn'>
           <Grid paddingTop={5}>
-            <Typography
-              component='div'
-              variant='h3'
-              textAlign='center'
-              className='gr_add_song_title'
-            >
-              Sign Up
-            </Typography>
-
-            <Box textAlign='center' marginTop={5}>
+            <Grid display='flex' justifyContent='space-between'>
+              <Typography
+                component='div'
+                variant='h3'
+                textAlign='center'
+                className='gr_add_song_title'
+                display='flex'
+                justifyContent='center'
+                alignSelf='center'
+              >
+                Sign Up
+              </Typography>
               <Icon
                 width='80px'
                 fill={
@@ -113,7 +130,7 @@ export const SignUp = () => {
                     : currentTheme === 'yellowBlack'
                     ? '#1D1D1D'
                     : currentTheme === 'blueWhite'
-                    ? '#DCDCDC'
+                    ? '#61DAFB'
                     : currentTheme === 'whiteBlue'
                     ? '#10374A'
                     : currentTheme === 'redDark'
@@ -123,9 +140,13 @@ export const SignUp = () => {
                     : ''
                 }
               />
-            </Box>
+            </Grid>
 
-            <Box component='form' marginTop={1}>
+            <Box
+              component='form'
+              onSubmit={(e) => signUpHandler(e)}
+              marginTop={1}
+            >
               <div>
                 <TextField
                   id='email_input'
@@ -136,7 +157,10 @@ export const SignUp = () => {
                   autoComplete='off'
                   type='text'
                   className='gr_email_input'
-                  onChange={(e) => setFullname(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignUpWrong(false);
+                    setFullname(e.target.value);
+                  }}
                   inputProps={{
                     autoComplete: 'off',
                   }}
@@ -150,7 +174,10 @@ export const SignUp = () => {
                   autoComplete='off'
                   type='email'
                   className='gr_email_input'
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignUpWrong(false);
+                    setEmail(e.target.value);
+                  }}
                 />
                 <TextField
                   id='password_input'
@@ -160,7 +187,10 @@ export const SignUp = () => {
                   margin='normal'
                   autoComplete='off'
                   className='gr_password_input'
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignUpWrong(false);
+                    setPassword(e.target.value);
+                  }}
                   type={!showHidePwd ? 'password' : 'text'}
                   InputProps={{
                     endAdornment: (
@@ -184,7 +214,10 @@ export const SignUp = () => {
                   margin='normal'
                   autoComplete='off'
                   className='gr_password_input'
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignUpWrong(false);
+                    setConfirmPassword(e.target.value);
+                  }}
                   type={!showHideConPwd ? 'password' : 'text'}
                   InputProps={{
                     endAdornment: (
@@ -202,12 +235,27 @@ export const SignUp = () => {
                 />
               </div>
 
+              {isSignUpWrong && (
+                <Box paddingTop={7}>
+                  <Typography
+                    variant='body1'
+                    component='div'
+                    textAlign='center'
+                    className='gr_welcome_title'
+                  >
+                    Something is wrong. Check if you added a correct email
+                    format, also check if the password and confirm password are
+                    both equal.
+                  </Typography>
+                </Box>
+              )}
+
               <Button
                 fullWidth
                 variant='contained'
                 style={{ marginTop: '30px' }}
                 className='gr_add_button'
-                onClick={(e) => signUpHandler(e)}
+                type='submit'
               >
                 <Typography component='div' variant='h4'>
                   SIGN UP
