@@ -381,7 +381,6 @@ export const CustomSavedBPM = () => {
                             display='flex'
                             justifyContent='center'
                             alignItems='center'
-                            // margin='auto'
                             flex={1}
                           >
                             <Typography
