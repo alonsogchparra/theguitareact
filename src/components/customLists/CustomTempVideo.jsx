@@ -17,6 +17,9 @@ import { songsTemp, titleTemporal } from '../../features/songs/songsTempSlice';
 import youtube from '../../api/youtube';
 import { key } from '../../keys/youtube';
 import Grid from '@mui/material/Unstable_Grid2';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 let theme = createTheme({
   typography: {
@@ -265,15 +268,41 @@ export const CustomTempVideo = () => {
                           className='gr_start_btn'
                           onClick={() => setVideoType('original')}
                         >
-                          <Typography
-                            variant='body1'
-                            component='div'
-                            textAlign='center'
-                            fontFamily='Outfit'
-                            fontWeight='700'
-                          >
-                            Original
-                          </Typography>
+                          <Box width='100%'>
+                            <Grid container display='flex' flexDirection='row'>
+                              <Grid
+                                display='flex'
+                                justifyContent='center'
+                                alignItems='center'
+                                flex={1}
+                              >
+                                <Typography
+                                  variant='body1'
+                                  component='div'
+                                  textAlign='center'
+                                  fontFamily='Outfit'
+                                  fontWeight='700'
+                                  sx={{
+                                    fontSize: { xs: '0.8rem', md: '1rem' },
+                                  }}
+                                >
+                                  Original
+                                </Typography>
+                              </Grid>
+                              <Grid
+                                justifyContent='flex-start'
+                                alignItems='center'
+                                sx={{ display: { xs: 'none', lg: 'flex' } }}
+                              >
+                                <OndemandVideoIcon
+                                  style={{
+                                    width: '1.2rem',
+                                    height: '1.2rem',
+                                  }}
+                                />
+                              </Grid>
+                            </Grid>
+                          </Box>
                         </Button>
                         <Button
                           variant='contained'
@@ -281,15 +310,41 @@ export const CustomTempVideo = () => {
                           className='gr_start_btn'
                           onClick={() => setVideoType('backing')}
                         >
-                          <Typography
-                            variant='body1'
-                            component='div'
-                            textAlign='center'
-                            fontFamily='Outfit'
-                            fontWeight='700'
-                          >
-                            Backing Track
-                          </Typography>
+                          <Box width='100%'>
+                            <Grid container display='flex' flexDirection='row'>
+                              <Grid
+                                display='flex'
+                                justifyContent='center'
+                                alignItems='center'
+                                flex={1}
+                              >
+                                <Typography
+                                  variant='body1'
+                                  component='div'
+                                  textAlign='center'
+                                  fontFamily='Outfit'
+                                  fontWeight='700'
+                                  sx={{
+                                    fontSize: { xs: '0.8rem', md: '1rem' },
+                                  }}
+                                >
+                                  Backing Track
+                                </Typography>
+                              </Grid>
+                              <Grid
+                                justifyContent='flex-start'
+                                alignItems='center'
+                                sx={{ display: { xs: 'none', lg: 'flex' } }}
+                              >
+                                <OndemandVideoIcon
+                                  style={{
+                                    width: '1.2rem',
+                                    height: '1.2rem',
+                                  }}
+                                />
+                              </Grid>
+                            </Grid>
+                          </Box>
                         </Button>
                         <Button
                           variant='contained'
@@ -297,15 +352,41 @@ export const CustomTempVideo = () => {
                           className='gr_start_btn'
                           onClick={() => setVideoType('live')}
                         >
-                          <Typography
-                            variant='body1'
-                            component='div'
-                            textAlign='center'
-                            fontFamily='Outfit'
-                            fontWeight='700'
-                          >
-                            Live
-                          </Typography>
+                          <Box width='100%'>
+                            <Grid container display='flex' flexDirection='row'>
+                              <Grid
+                                display='flex'
+                                justifyContent='center'
+                                alignItems='center'
+                                flex={1}
+                              >
+                                <Typography
+                                  variant='body1'
+                                  component='div'
+                                  textAlign='center'
+                                  fontFamily='Outfit'
+                                  fontWeight='700'
+                                  sx={{
+                                    fontSize: { xs: '0.8rem', md: '1rem' },
+                                  }}
+                                >
+                                  Live
+                                </Typography>
+                              </Grid>
+                              <Grid
+                                justifyContent='flex-start'
+                                alignItems='center'
+                                sx={{ display: { xs: 'none', lg: 'flex' } }}
+                              >
+                                <OndemandVideoIcon
+                                  style={{
+                                    width: '1.2rem',
+                                    height: '1.2rem',
+                                  }}
+                                />
+                              </Grid>
+                            </Grid>
+                          </Box>
                         </Button>
                       </Grid>
                     </>
@@ -348,19 +429,56 @@ export const CustomTempVideo = () => {
                         copyMusicList.length === counter ? startOver : getSong
                       }
                     >
-                      <Typography
-                        variant='h4'
-                        component='div'
-                        textAlign='center'
-                        fontFamily='Outfit'
-                        fontWeight='700'
-                      >
-                        {copyMusicList.length === counter
-                          ? 'PLAY AGAIN'
-                          : isButtonPressed
-                          ? 'NEXT'
-                          : 'PLAY'}
-                      </Typography>
+                      <Box width='100%'>
+                        <Grid
+                          container
+                          display='flex'
+                          flexDirection='row'
+                          style={{ paddingTop: 7, paddingBottom: 7 }}
+                        >
+                          <Grid
+                            display='flex'
+                            justifyContent='center'
+                            alignItems='center'
+                            flex={1}
+                          >
+                            <Typography
+                              variant='h4'
+                              component='div'
+                              textAlign='center'
+                              fontFamily='Outfit'
+                              fontWeight='700'
+                            >
+                              {copyMusicList.length === counter
+                                ? 'PLAY AGAIN'
+                                : isButtonPressed
+                                ? 'NEXT'
+                                : 'PLAY THE VIDEO'}
+                            </Typography>
+                          </Grid>
+
+                          <Grid
+                            display='flex'
+                            justifyContent='flex-start'
+                            alignItems='center'
+                            padding={0}
+                          >
+                            {copyMusicList.length === counter ? (
+                              <PlayCircleOutlineIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            ) : isButtonPressed ? (
+                              <SkipNextIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            ) : (
+                              <PlayCircleOutlineIcon
+                                style={{ width: '2.5rem', height: '2.5rem' }}
+                              />
+                            )}
+                          </Grid>
+                        </Grid>
+                      </Box>
                     </Button>
                   </Box>
                 </Box>
