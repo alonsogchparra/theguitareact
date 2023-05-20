@@ -3,16 +3,15 @@ import { Box, Container, LinearProgress } from '@mui/material';
 import { ReactComponent as Icon } from '../../assets/guitareact_logo.svg';
 import { useSelector } from 'react-redux';
 import { theCurrentTheme } from '../../features/theme/themeSlice';
-import Grid from '@mui/material/Unstable_Grid2';
 
-export const LoadingAll = () => {
+export const LoadingAll = ({ isSongsList = false }) => {
   const currentTheme = useSelector(theCurrentTheme);
   return (
     <>
       <Container maxWidth='xs' className='animate__animated animate__fadeIn'>
         <Box
           width='100%'
-          height='80vh'
+          height={isSongsList ? 'auto' : '80vh'}
           display='flex'
           flexDirection='column'
           justifyContent='center'
