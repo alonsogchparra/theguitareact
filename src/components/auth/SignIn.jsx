@@ -32,6 +32,9 @@ let theme = createTheme({
       fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
       fontWeight: 700,
     },
+    body1: {
+      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
+    },
   },
 });
 
@@ -41,6 +44,7 @@ export const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showHidePwd, setShowHidePwd] = useState(false);
+  const [isSignInWrong, setIsSignInWrong] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -55,6 +59,7 @@ export const SignIn = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
+        setIsSignInWrong(false);
         dispatch(
           login({
             email: userAuth.user.email,
@@ -63,7 +68,10 @@ export const SignIn = () => {
           })
         );
       })
-      .catch((err) => console.log('SIGN IN ERROR', err));
+      .catch((err) => {
+        console.log('SIGN IN ERROR', err);
+        setIsSignInWrong(true);
+      });
   };
   return (
     <>
@@ -71,16 +79,18 @@ export const SignIn = () => {
         <CssBaseline />
         <Container maxWidth='sm' className='animate__animated animate__fadeIn'>
           <Grid paddingTop={5}>
-            <Typography
-              component='div'
-              variant='h3'
-              textAlign='center'
-              className='gr_add_song_title'
-            >
-              Sign In
-            </Typography>
-
-            <Box textAlign='center' marginTop={5}>
+            <Grid display='flex' justifyContent='space-between'>
+              <Typography
+                component='div'
+                variant='h3'
+                textAlign='center'
+                className='gr_add_song_title'
+                display='flex'
+                justifyContent='center'
+                alignSelf='center'
+              >
+                Sign In
+              </Typography>
               <Icon
                 width='80px'
                 fill={
@@ -99,9 +109,13 @@ export const SignIn = () => {
                     : ''
                 }
               />
-            </Box>
+            </Grid>
 
-            <Box component='form' marginTop={1}>
+            <Box
+              component='form'
+              onSubmit={(e) => signInHandler(e)}
+              marginTop={1}
+            >
               <div>
                 <TextField
                   id='email_input'
@@ -112,7 +126,10 @@ export const SignIn = () => {
                   autoComplete='off'
                   type='email'
                   className='gr_email_input'
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignInWrong(false);
+                    setEmail(e.target.value);
+                  }}
                 />
                 <TextField
                   id='password_input'
@@ -123,7 +140,10 @@ export const SignIn = () => {
                   autoComplete='off'
                   className='gr_password_input'
                   type={!showHidePwd ? 'password' : 'text'}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setIsSignInWrong(false);
+                    setPassword(e.target.value);
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment
@@ -143,12 +163,26 @@ export const SignIn = () => {
                 />
               </div>
 
+              {isSignInWrong && (
+                <Box paddingTop={7}>
+                  <Typography
+                    variant='body1'
+                    component='div'
+                    textAlign='center'
+                    className='gr_welcome_title'
+                  >
+                    Something is wrong. Check if you added the email and
+                    password correctly. Or try later.
+                  </Typography>
+                </Box>
+              )}
+
               <Button
                 fullWidth
                 variant='contained'
                 style={{ marginTop: '80px' }}
                 className='gr_add_button'
-                onClick={(e) => signInHandler(e)}
+                type='submit'
               >
                 <Typography component='div' variant='h4'>
                   SIGN IN
