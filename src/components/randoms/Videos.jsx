@@ -6,7 +6,6 @@ import {
   CardActionArea,
   CardMedia,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
@@ -22,23 +21,9 @@ import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import youtube from '../../api/youtube';
 import { key } from '../../keys/youtube';
 import { LoadingAll } from '../layouts/LoadingAll';
+import { videoTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h5: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h6: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = videoTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -150,15 +135,6 @@ export const Videos = () => {
   useEffect(() => {
     showVideoHandler(musicItem?.artist, musicItem?.title);
   }, [videoType]);
-
-  // console.log('------- Random Videos --------');
-  // console.log('SONGS BPM', songs);
-  // console.log('USER', user);
-  // console.log('musicList', musicList);
-  // console.log('COPYmusicList', copyMusicList);
-  // console.log('MusicITem', musicItem);
-  // console.log('VIDEOS', videos);
-  // console.log('SelectedVideo', selectedVideo);
 
   return (
     <>

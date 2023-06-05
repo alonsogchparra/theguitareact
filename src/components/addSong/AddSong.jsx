@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
   TextField,
@@ -20,19 +19,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/auth/userSlice';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
+import { addSongTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-  },
-});
+let theme = addSongTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -87,9 +76,6 @@ export const AddSong = () => {
     }
   }, [id, song]);
 
-  // console.log('SONG INFO', song);
-  // console.log('DATA INFO', data);
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -142,8 +128,7 @@ export const AddSong = () => {
                   value={beat_per_minute}
                   className='gr_email_input'
                   onChange={handleChange}
-                  InputLabelProps={{shrink: true}}
-
+                  InputLabelProps={{ shrink: true }}
                 />
                 <TextField
                   id='artist-name'
@@ -156,7 +141,7 @@ export const AddSong = () => {
                   value={beats_per_measure}
                   className='gr_email_input'
                   onChange={handleChange}
-                  InputLabelProps={{shrink: true}}
+                  InputLabelProps={{ shrink: true }}
                 />
                 <TextField
                   id='additional-info'

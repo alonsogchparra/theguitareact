@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
-  createTheme,
   CssBaseline,
   Drawer,
   Hidden,
@@ -22,19 +21,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+import { initialNavbarTypography } from '../../utils/typographySelection';
 
-const theme = createTheme({
-  typography: {
-    h5: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 600,
-    },
-    h6: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontSize: '1.10rem',
-    },
-  },
-});
+const theme = initialNavbarTypography();
 
 export const InitialNavbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -126,21 +115,6 @@ export const InitialNavbar = () => {
                 </Typography>
               </ListItem>
             </Box>
-
-            {/* <Box>
-              <ListItem className='gr_logout_container_drawer'>
-                <NavLink
-                  to='sign-in'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                >
-                  <Typography variant='h6' component='div'>
-                    Logout
-                  </Typography>
-                </NavLink>
-              </ListItem>
-            </Box> */}
           </Grid>
         </List>
       </Box>

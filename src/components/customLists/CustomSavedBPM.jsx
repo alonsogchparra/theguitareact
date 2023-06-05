@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   IconButton,
   responsiveFontSizes,
@@ -22,27 +21,9 @@ import { songsList, titleList } from '../../features/songs/songsSavedSlice';
 import { useMetronome } from 'react-metronome-hook';
 import click1 from '../../media/sounds/click1.wav';
 import click2 from '../../media/sounds/click2.wav';
+import { customSavedBPMTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h5: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = customSavedBPMTypography();
 
 theme = responsiveFontSizes(theme);
 

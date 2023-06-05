@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  createTheme,
   CssBaseline,
   ThemeProvider,
   Typography,
@@ -17,27 +16,9 @@ import click2 from '../../media/sounds/click2.wav';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { songSelectedBPMTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h5: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = songSelectedBPMTypography();
 
 export const SongSelectedBPM = () => {
   const {
@@ -66,8 +47,6 @@ export const SongSelectedBPM = () => {
   const [addBeatsPM, setAddBeatsPM] = useState(beatsPM);
 
   const regex = /^[0-9\b]+$/;
-
-  // console.log('SONGSELECTEDBPM', useLocation());
 
   const changeBPMHandler = (e) => {
     if (e.target.value === '' || regex.test(e.target.value)) {

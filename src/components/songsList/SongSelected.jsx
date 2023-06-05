@@ -6,7 +6,6 @@ import {
   CardActionArea,
   CardMedia,
   Container,
-  createTheme,
   CssBaseline,
   Divider,
   responsiveFontSizes,
@@ -18,19 +17,9 @@ import { useLocation } from 'react-router-dom';
 import youtube from '../../api/youtube';
 import { key } from '../../keys/youtube';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import { songSelectedTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = songSelectedTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -84,11 +73,6 @@ export const SongSelected = () => {
     showVideoHandler(artist, title);
   }, [videoType]);
 
-  // console.log('Artist', artist);
-  // console.log('TItle', title);
-  // console.log('Extra Info', extraInfo);
-  // console.log('Video Type', videoType);
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -106,26 +90,6 @@ export const SongSelected = () => {
               </Typography>
             </Box>
 
-            {/* <Box width='100%' paddingTop={2}>
-              <Typography
-                variant='h4'
-                component='div'
-                textAlign='center'
-                className='gr_welcome_title'
-              >
-                <strong>Artist/Band: </strong>
-                {artist}
-              </Typography>
-              <Typography
-                variant='h4'
-                component='div'
-                textAlign='center'
-                className='gr_welcome_title'
-              >
-                <strong>Song's title: </strong>
-                {title}
-              </Typography>
-            </Box> */}
             <Container maxWidth='xl' sx={{ paddingTop: 2 }}>
               <Box width='100%' paddingY={2}>
                 <Divider
@@ -157,7 +121,7 @@ export const SongSelected = () => {
           </Grid>
 
           {/* Content */}
-          {/* <Container maxWidth='lg'></Container> */}
+
           <Grid
             paddingTop={2}
             display='flex'

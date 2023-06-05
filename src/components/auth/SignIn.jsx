@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   IconButton,
   InputAdornment,
@@ -21,22 +20,9 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { login } from '../../features/auth/userSlice';
+import { signInTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-    },
-  },
-});
+let theme = signInTypography();
 
 theme = responsiveFontSizes(theme);
 

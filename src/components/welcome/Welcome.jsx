@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Box,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
@@ -12,18 +11,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { ReactComponent as Icon } from '../../assets/guitareact_logo.svg';
 import { useSelector } from 'react-redux';
 import { theCurrentTheme } from '../../features/theme/themeSlice';
+import { welcomeTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h1: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 600,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-    },
-  },
-});
+let theme = welcomeTypography();
 
 theme = responsiveFontSizes(theme);
 

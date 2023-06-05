@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   Hidden,
   IconButton,
@@ -34,32 +33,9 @@ import {
 } from '../../features/songs/localSongsSlice';
 import { useNavigate } from 'react-router-dom';
 import { LoadingAll } from '../layouts/LoadingAll';
+import { songsListTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h5: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h6: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 300,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-      fontSize: '.8rem',
-    },
-  },
-});
+let theme = songsListTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -232,13 +208,6 @@ export const SongsList = () => {
       setCopySongs(auxLocalSongs);
     }
   }, []);
-
-  // console.log('copySongs', copySongs);
-  // console.log('copySongs-Actualizado', copySongs);
-  // console.log('songsTempList', songsTempList);
-  // console.log('LOCAL SONGS', localSongs);
-  // console.log('SONGS', songs);
-  // console.log('songSelected', songSelected);
 
   return (
     <>

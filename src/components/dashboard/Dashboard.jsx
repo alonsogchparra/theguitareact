@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
@@ -19,35 +18,10 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { Link } from 'react-router-dom';
 import { selectUser } from '../../features/auth/userSlice';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
+import { dashboardTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 600,
-      fontSize: '2.7rem',
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-      fontSize: '.8rem',
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 300,
-      md: 600,
-      bg: 900,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
+let theme = dashboardTypography();
+
 theme = responsiveFontSizes(theme);
 
 export const Dashboard = () => {
@@ -63,8 +37,6 @@ export const Dashboard = () => {
       setCopySongs(songs.filter((song) => song.uid === user.uid));
     }
   }, [songs]);
-
-  // console.log('COPYSONGS - Dashboard', copySongs);
 
   return (
     <>

@@ -17,6 +17,18 @@ input#password_input {
   color: $songTitleLabel;
 }
 
+label#full_name_input-label {
+  color: $songTitleLabel;
+  font-family: 'Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu';
+}
+
+input#full_name_input {
+  font-family: 'Outfit', 'Roboto', 'Oxygen', 'Ubuntu';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: $songTitleLabel;
+}
+
 // CHECKING
 
 // form .gr_password_input div {

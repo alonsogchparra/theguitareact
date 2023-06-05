@@ -5,7 +5,6 @@ import {
   CardActionArea,
   CardMedia,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
@@ -20,23 +19,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { customTempVideoTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h5: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h6: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = customTempVideoTypography();
 
 theme = responsiveFontSizes(theme);
 

@@ -3,10 +3,8 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   responsiveFontSizes,
-  Slider,
   ThemeProvider,
   Typography,
   TextField,
@@ -25,27 +23,9 @@ import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { songsWithBPMTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    h5: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 400,
-    },
-  },
-});
+let theme = songsWithBPMTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -155,12 +135,6 @@ export const SongsWithBPM = () => {
     setBpm(addBPM);
     setBeatsPerMeasure(addBeatsPM);
   }, [addBPM, addBeatsPM]);
-
-  // console.log('SONGS BPM', songs);
-  // console.log('USER', user);
-  // console.log('musicList', musicList);
-  // console.log('COPYmusicList', copyMusicList);
-  // console.log('MusicITem', musicItem);
 
   return (
     <>

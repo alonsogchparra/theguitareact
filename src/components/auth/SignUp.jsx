@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Container,
-  createTheme,
   CssBaseline,
   IconButton,
   InputAdornment,
@@ -24,22 +23,9 @@ import {
   updateProfile,
 } from '../../firebase';
 import { login } from '../../features/auth/userSlice';
+import { signUpTypography } from '../../utils/typographySelection';
 
-let theme = createTheme({
-  typography: {
-    h3: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    h4: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 700,
-    },
-    body1: {
-      fontFamily: ['Plus Jakarta Sans', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-    },
-  },
-});
+let theme = signUpTypography();
 
 theme = responsiveFontSizes(theme);
 
@@ -149,7 +135,7 @@ export const SignUp = () => {
             >
               <div>
                 <TextField
-                  id='email_input'
+                  id='full_name_input'
                   label='Full name'
                   variant='standard'
                   fullWidth

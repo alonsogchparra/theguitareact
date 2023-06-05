@@ -24,19 +24,9 @@ import {
 } from '../../features/theme/themeSlice';
 import { logout } from '../../features/auth/userSlice';
 import { auth } from '../../firebase';
+import { navbarTypography } from '../../utils/typographySelection';
 
-const theme = createTheme({
-  typography: {
-    h5: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontWeight: 600,
-    },
-    h6: {
-      fontFamily: ['Outfit', 'Roboto', 'Oxygen', 'Ubuntu'].join(','),
-      fontSize: '1.10rem',
-    },
-  },
-});
+const theme = navbarTypography();
 
 export const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -176,10 +166,6 @@ export const Navbar = () => {
             <Box>
               <ListItem className='gr_logout_container_drawer'>
                 <Link
-                  // to='sign-in'
-                  // style={({ isActive }) => ({
-                  //   textDecoration: isActive ? 'underline' : 'none',
-                  // })}
                   style={{ textDecoration: 'none' }}
                   onClick={logoutHandler}
                 >
