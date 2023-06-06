@@ -5,18 +5,13 @@ import {
   Button,
   Container,
   CssBaseline,
-  IconButton,
-  InputAdornment,
   responsiveFontSizes,
-  TextField,
   ThemeProvider,
   Typography,
 } from '@mui/material';
 import { ReactComponent as Icon } from '../../assets/guitareact_logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { theCurrentTheme } from '../../features/theme/themeSlice';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   createUserWithEmailAndPassword,
   auth,
@@ -24,6 +19,7 @@ import {
 } from '../../firebase';
 import { login } from '../../features/auth/userSlice';
 import { signUpTypography } from '../../utils/typographySelection';
+import { SignUpForm } from './SignUpForm';
 
 let theme = signUpTypography();
 
@@ -43,7 +39,7 @@ export const SignUp = () => {
 
   const dispatch = useDispatch();
 
-  const handlerShowHidePwdHandler = () => {
+  const handlerShowHidePwd = () => {
     setShowHidePwd(!showHidePwd);
   };
 
@@ -66,14 +62,14 @@ export const SignUp = () => {
             .then(
               ({
                 userAuth: {
-                  user: { email, uid },
+                  user: { email, uid, displayName },
                 },
               }) => {
                 dispatch(
                   login({
                     email,
                     uid,
-                    displayName: fullname,
+                    displayName,
                   })
                 );
               }
@@ -133,93 +129,17 @@ export const SignUp = () => {
               onSubmit={(e) => signUpHandler(e)}
               marginTop={1}
             >
-              <div>
-                <TextField
-                  id='full_name_input'
-                  label='Full name'
-                  variant='standard'
-                  fullWidth
-                  margin='normal'
-                  autoComplete='off'
-                  type='text'
-                  className='gr_email_input'
-                  onChange={(e) => {
-                    setIsSignUpWrong(false);
-                    setFullname(e.target.value);
-                  }}
-                  inputProps={{
-                    autoComplete: 'off',
-                  }}
-                />
-                <TextField
-                  id='email_input'
-                  label='Email'
-                  variant='standard'
-                  fullWidth
-                  margin='normal'
-                  autoComplete='off'
-                  type='email'
-                  className='gr_email_input'
-                  onChange={(e) => {
-                    setIsSignUpWrong(false);
-                    setEmail(e.target.value);
-                  }}
-                />
-                <TextField
-                  id='password_input'
-                  label='Password'
-                  variant='standard'
-                  fullWidth
-                  margin='normal'
-                  autoComplete='off'
-                  className='gr_password_input'
-                  onChange={(e) => {
-                    setIsSignUpWrong(false);
-                    setPassword(e.target.value);
-                  }}
-                  type={!showHidePwd ? 'password' : 'text'}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton onClick={handlerShowHidePwdHandler}>
-                          {showHidePwd ? (
-                            <VisibilityOffIcon className='gr_icon_textfield' />
-                          ) : (
-                            <VisibilityIcon className='gr_icon_textfield' />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <TextField
-                  id='confirm_password_input'
-                  label='Confirm password'
-                  variant='standard'
-                  fullWidth
-                  margin='normal'
-                  autoComplete='off'
-                  className='gr_password_input'
-                  onChange={(e) => {
-                    setIsSignUpWrong(false);
-                    setConfirmPassword(e.target.value);
-                  }}
-                  type={!showHideConPwd ? 'password' : 'text'}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton onClick={handlerShowHideConPwd}>
-                          {showHideConPwd ? (
-                            <VisibilityOffIcon className='gr_icon_textfield' />
-                          ) : (
-                            <VisibilityIcon className='gr_icon_textfield' />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
+              <SignUpForm
+                showHidePwd={showHidePwd}
+                showHideConPwd={showHideConPwd}
+                setIsSignUpWrong={setIsSignUpWrong}
+                setFullname={setFullname}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                setConfirmPassword={setConfirmPassword}
+                handlerShowHideConPwd={handlerShowHideConPwd}
+                handlerShowHidePwd={handlerShowHidePwd}
+              />
 
               {isSignUpWrong && (
                 <Box paddingTop={7}>
