@@ -12,7 +12,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../features/auth/userSlice';
+import { selectUser } from '../../../features/auth/userSlice';
 
 export const CustomListSaved = ({
   customList,
