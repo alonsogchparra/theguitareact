@@ -39,15 +39,15 @@ export const ModalListTemporal = ({
                 <IconButton onClick={handleCloseModal}>
                   <CancelIcon
                     className='gr_close_modal_btn'
-                    style={{
-                      width: '3rem',
-                      height: '3rem',
+                    sx={{
+                      width: { xs: '2rem', md: '3rem' },
+                      height: { xs: '2rem', md: '3rem' },
                     }}
                   />
                 </IconButton>
               </Grid>
 
-              <Grid marginBottom={5}>
+              <Grid sx={{ marginBottom: { xs: 1, md: 5 } }}>
                 <Typography
                   component='div'
                   variant='h3'
@@ -55,6 +55,7 @@ export const ModalListTemporal = ({
                   className='gr_modal_text_one'
                   paddingBottom={3}
                   style={{ textDecoration: 'underline' }}
+                  sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}
                 >
                   Temporal List
                 </Typography>
@@ -63,6 +64,7 @@ export const ModalListTemporal = ({
                   variant='h4'
                   textAlign='center'
                   className='gr_modal_text_one'
+                  sx={{ fontSize: { xs: '1.2rem', md: '1.5625rem' } }}
                 >
                   You chose {temporalTitle}
                 </Typography>
@@ -71,6 +73,7 @@ export const ModalListTemporal = ({
                   variant='h3'
                   textAlign='center'
                   className='gr_modal_text_two'
+                  sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}
                 >
                   What you wanna do?
                 </Typography>
@@ -97,16 +100,19 @@ export const ModalListTemporal = ({
                       >
                         <PlayCircleFilledWhiteIcon
                           style={{
-                            width: '5rem',
-                            height: '5rem',
                             marginBottom: '1rem',
                           }}
                           className='gr_icon_choice_modal'
+                          sx={{
+                            width: { xs: '3rem', md: '5rem' },
+                            height: { xs: '3rem', md: '5rem' },
+                          }}
                         />
                         <Typography
                           variant='body1'
                           component='div'
                           className='gr_text_choice_modal'
+                          sx={{ fontSize: { xs: '0.9rem', md: '1rem' } }}
                         >
                           Play random songs with BPM
                         </Typography>
@@ -135,11 +141,13 @@ export const ModalListTemporal = ({
                       >
                         <PlayCircleOutlineIcon
                           style={{
-                            width: '5rem',
-                            height: '5rem',
                             marginBottom: '1rem',
                           }}
                           className='gr_icon_choice_modal'
+                          sx={{
+                            width: { xs: '3rem', md: '5rem' },
+                            height: { xs: '3rem', md: '5rem' },
+                          }}
                         />
                         <Typography
                           variant='body1'
