@@ -4,11 +4,8 @@ import {
   CssBaseline,
   ThemeProvider,
   Typography,
-  createTheme,
   Hidden,
   IconButton,
-  List,
-  ListItem,
   Drawer,
 } from '@mui/material';
 import { Box } from '@mui/system';
@@ -25,6 +22,8 @@ import {
 import { logout } from '../../features/auth/userSlice';
 import { auth } from '../../firebase';
 import { navbarTypography } from '../../utils/typographySelection';
+import { NavbarDrawer } from './drawers/NavbarDrawer';
+import { NavbarOptions } from './NavbarOptions';
 
 const theme = navbarTypography();
 
@@ -63,124 +62,6 @@ export const Navbar = () => {
     setTheme();
   }, [currentTheme]);
 
-  const drawer = (
-    <>
-      <Box sx={{ width: 270 }}>
-        <List>
-          <Grid
-            display='flex'
-            flexDirection='column'
-            justifyContent='space-between'
-            height='90vh'
-            overflow='hidden'
-          >
-            <Box>
-              <ListItem>
-                <NavLink
-                  to='add-song'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                  className='gr_items_drawer'
-                >
-                  <Typography variant='h6' component='div'>
-                    Add Song
-                  </Typography>
-                </NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink
-                  to='songs-list'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                  className='gr_items_drawer'
-                >
-                  <Typography variant='h6' component='div'>
-                    Songs List
-                  </Typography>
-                </NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink
-                  to='custom-lists'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                  className='gr_items_drawer'
-                >
-                  <Typography variant='h6' component='div'>
-                    Custom List
-                  </Typography>
-                </NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink
-                  to='random-songs-with-bpm'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                  className='gr_items_drawer'
-                >
-                  <Typography variant='h6' component='div'>
-                    Random All Songs with BPM
-                  </Typography>
-                </NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink
-                  to='random-videos'
-                  style={({ isActive }) => ({
-                    textDecoration: isActive ? 'underline' : 'none',
-                  })}
-                  className='gr_items_drawer'
-                >
-                  <Typography variant='h6' component='div'>
-                    Random All Videos
-                  </Typography>
-                </NavLink>
-              </ListItem>
-            </Box>
-
-            <Box>
-              <ListItem
-                className='gr_ct_container_drawer'
-                onClick={changeThemeHandler}
-              >
-                <Typography variant='h6' component='div'>
-                  Change Theme
-                </Typography>
-              </ListItem>
-              <ListItem
-                className='gr_vms_container_drawer'
-                onClick={() =>
-                  window.open('https://alonsogchparra.web.app/', '_blank')
-                }
-              >
-                <Typography variant='h6' component='div'>
-                  Visit my website
-                </Typography>
-              </ListItem>
-            </Box>
-
-            <Box>
-              <ListItem className='gr_logout_container_drawer'>
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  onClick={logoutHandler}
-                >
-                  <Typography variant='h6' component='div'>
-                    Logout
-                  </Typography>
-                </Link>
-              </ListItem>
-            </Box>
-          </Grid>
-        </List>
-      </Box>
-    </>
-  );
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -205,85 +86,7 @@ export const Navbar = () => {
               </NavLink>
             </Box>
             <Hidden lgDown>
-              <Box>
-                <Grid display='flex' justifyContent='space-between'>
-                  <NavLink
-                    to='add-song'
-                    style={({ isActive }) => ({
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      textDecoration: isActive ? 'underline' : 'none',
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? 'gr_nav_item_selected' : 'gr_nav_item'
-                    }
-                  >
-                    <Typography variant='h6' component='div'>
-                      Add Song
-                    </Typography>
-                  </NavLink>
-                  <NavLink
-                    to='songs-list'
-                    style={({ isActive }) => ({
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      textDecoration: isActive ? 'underline' : 'none',
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? 'gr_nav_item_selected' : 'gr_nav_item'
-                    }
-                  >
-                    <Typography variant='h6' component='div'>
-                      Songs List
-                    </Typography>
-                  </NavLink>
-                  <NavLink
-                    to='custom-lists'
-                    style={({ isActive }) => ({
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      textDecoration: isActive ? 'underline' : 'none',
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? 'gr_nav_item_selected' : 'gr_nav_item'
-                    }
-                  >
-                    <Typography variant='h6' component='div'>
-                      Custom List
-                    </Typography>
-                  </NavLink>
-                  <NavLink
-                    to='random-songs-with-bpm'
-                    style={({ isActive }) => ({
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      textDecoration: isActive ? 'underline' : 'none',
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? 'gr_nav_item_selected' : 'gr_nav_item'
-                    }
-                  >
-                    <Typography variant='h6' component='div'>
-                      Random All Songs with BPM
-                    </Typography>
-                  </NavLink>
-                  <NavLink
-                    to='random-videos'
-                    style={({ isActive }) => ({
-                      paddingLeft: 10,
-                      paddingRight: 10,
-                      textDecoration: isActive ? 'underline' : 'none',
-                    })}
-                    className={({ isActive }) =>
-                      isActive ? 'gr_nav_item_selected' : 'gr_nav_item'
-                    }
-                  >
-                    <Typography variant='h6' component='div'>
-                      Random All Videos
-                    </Typography>
-                  </NavLink>
-                </Grid>
-              </Box>
+              <NavbarOptions />
 
               <Box>
                 <Link
@@ -347,7 +150,10 @@ export const Navbar = () => {
                   </IconButton>
                 </Box>
               </Grid>
-              {drawer}
+              <NavbarDrawer
+                changeThemeHandler={changeThemeHandler}
+                logoutHandler={logoutHandler}
+              />
             </Drawer>
           </Hidden>
         </nav>
