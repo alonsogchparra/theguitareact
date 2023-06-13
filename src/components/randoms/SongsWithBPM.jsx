@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  Button,
   Container,
   CssBaseline,
   responsiveFontSizes,
   ThemeProvider,
   Typography,
-  TextField,
-  IconButton,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
@@ -18,12 +15,10 @@ import { LoadingAll } from '../layouts/LoadingAll';
 import { useMetronome } from 'react-metronome-hook';
 import click1 from '../../media/sounds/click1.wav';
 import click2 from '../../media/sounds/click2.wav';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { songsWithBPMTypography } from '../../utils/typographySelection';
+import { ExtraInfo } from './bpmElements/ExtraInfo';
+import { BPMController } from './bpmElements/BPMController';
+import { PlayNextButton } from './bpmElements/PlayNextButton';
 
 let theme = songsWithBPMTypography();
 
@@ -196,51 +191,7 @@ export const SongsWithBPM = () => {
               }}
             >
               {musicItem?.extraInfo && (
-                <Grid
-                  width='100%'
-                  sx={{
-                    paddingBottom: {
-                      xs: 5,
-                      md: 0,
-                    },
-                  }}
-                >
-                  <Box width='100%'>
-                    <Container maxWidth='sm' style={{ paddingTop: '40px' }}>
-                      <>
-                        <Box
-                          width='100%'
-                          paddingY={3.4}
-                          className='gr_song_info_box'
-                        >
-                          <Typography
-                            variant='h4'
-                            component='div'
-                            textAlign='center'
-                            fontWeight='700'
-                            className='gr_info_text'
-                          >
-                            Extra Info:
-                          </Typography>
-                        </Box>
-                      </>
-                    </Container>
-
-                    <Typography
-                      component='div'
-                      variant='h4'
-                      textAlign='center'
-                      className='gr_add_song_title'
-                      paddingTop={3}
-                      style={{
-                        whiteSpace: 'pre-line',
-                        verticalAlign: 'bottom',
-                      }}
-                    >
-                      {musicItem?.extraInfo}
-                    </Typography>
-                  </Box>
-                </Grid>
+                <ExtraInfo extraInfo={musicItem?.extraInfo} />
               )}
 
               <Grid
@@ -255,184 +206,26 @@ export const SongsWithBPM = () => {
                 <Box width='100%'>
                   <Container maxWidth='sm' style={{ paddingTop: '40px' }}>
                     {musicItem && (
-                      <>
-                        <Box
-                          width='100%'
-                          paddingY={2}
-                          className='gr_song_info_box'
-                        >
-                          <Typography
-                            variant='h5'
-                            component='div'
-                            textAlign='center'
-                            fontWeight='700'
-                            className='gr_info_text'
-                          >
-                            Song: {musicItem?.title}
-                          </Typography>
-                          <Typography
-                            variant='h5'
-                            component='div'
-                            textAlign='center'
-                            fontWeight='700'
-                            className='gr_info_text'
-                          >
-                            Artist/Band: {musicItem?.artist}
-                          </Typography>
-                        </Box>
-
-                        <Box width='100%' paddingTop={1}>
-                          {/* NEW METRONOME */}
-                          <div>
-                            <TextField
-                              id='song-title'
-                              label='BPM'
-                              variant='standard'
-                              fullWidth
-                              margin='normal'
-                              autoComplete='off'
-                              name='bpm'
-                              value={addBPM}
-                              className='gr_bpm_textfield'
-                              onChange={(e) => changeBPMHandler(e)}
-                              placeholder='Change BPM'
-                              type='number'
-                            />
-                            <TextField
-                              id='song-title'
-                              label='Beats per measure'
-                              variant='standard'
-                              fullWidth
-                              margin='normal'
-                              autoComplete='off'
-                              name='bpmeasure'
-                              value={addBeatsPM}
-                              className='gr_bpm_textfield'
-                              onChange={(e) => changeBPMHandler(e)}
-                              placeholder='Change beats per measure'
-                              type='number'
-                            />
-                            <Grid
-                              display='flex'
-                              justifyContent='center'
-                              paddingY={2}
-                            >
-                              <IconButton
-                                onClick={
-                                  isTicking ? stopMetronome : startMetronome
-                                }
-                              >
-                                {isTicking ? (
-                                  <PauseCircleIcon
-                                    style={{ width: '3rem', height: '3rem' }}
-                                    className='gr_song_action'
-                                  />
-                                ) : (
-                                  <PlayCircleIcon
-                                    style={{ width: '3rem', height: '3rem' }}
-                                    className='gr_song_action'
-                                  />
-                                )}
-                              </IconButton>
-                              <IconButton
-                                onClick={() => setSounds([click2, click1])}
-                              >
-                                <ChangeCircleIcon
-                                  style={{ width: '3rem', height: '3rem' }}
-                                  className='gr_song_action'
-                                />
-                              </IconButton>
-                            </Grid>
-                          </div>
-                        </Box>
-                      </>
+                      <BPMController
+                        title={musicItem?.title}
+                        artist={musicItem?.artist}
+                        changeBPMHandler={changeBPMHandler}
+                        isTicking={isTicking}
+                        stopMetronome={stopMetronome}
+                        startMetronome={startMetronome}
+                        addBPM={addBPM}
+                        addBeatsPM={addBeatsPM}
+                      />
                     )}
 
-                    <Box width='100%' marginTop={2}>
-                      {!musicItem && (
-                        <Typography
-                          component='div'
-                          variant='h5'
-                          textAlign='center'
-                          className='gr_text_start_over'
-                        >
-                          To use BPM slider, press the button to start with.
-                        </Typography>
-                      )}
-
-                      {counter === copyMusicList.length && (
-                        <Typography
-                          component='div'
-                          variant='h5'
-                          textAlign='center'
-                          className='gr_text_start_over'
-                        >
-                          You played all the songs on your list. Do you want to
-                          start over?
-                        </Typography>
-                      )}
-
-                      <Button
-                        variant='contained'
-                        fullWidth
-                        style={{ marginTop: '15px' }}
-                        className='gr_next_btn'
-                        onClick={
-                          copyMusicList.length === counter ? startOver : getSong
-                        }
-                      >
-                        <Box width='100%'>
-                          <Grid
-                            container
-                            display='flex'
-                            flexDirection='row'
-                            style={{ paddingTop: 7, paddingBottom: 7 }}
-                          >
-                            <Grid
-                              display='flex'
-                              justifyContent='center'
-                              alignItems='center'
-                              flex='1'
-                            >
-                              <Typography
-                                variant='h4'
-                                component='div'
-                                textAlign='center'
-                                fontFamily='Outfit'
-                                fontWeight='700'
-                              >
-                                {copyMusicList.length === counter
-                                  ? 'PLAY AGAIN'
-                                  : isButtonPressed
-                                  ? 'NEXT'
-                                  : 'PLAY THE BEAT'}
-                              </Typography>
-                            </Grid>
-
-                            <Grid
-                              display='flex'
-                              justifyContent='flex-start'
-                              alignItems='center'
-                              padding={0}
-                            >
-                              {copyMusicList.length === counter ? (
-                                <PlayCircleOutlineIcon
-                                  style={{ width: '2.5rem', height: '2.5rem' }}
-                                />
-                              ) : isButtonPressed ? (
-                                <SkipNextIcon
-                                  style={{ width: '2.5rem', height: '2.5rem' }}
-                                />
-                              ) : (
-                                <PlayCircleOutlineIcon
-                                  style={{ width: '2.5rem', height: '2.5rem' }}
-                                />
-                              )}
-                            </Grid>
-                          </Grid>
-                        </Box>
-                      </Button>
-                    </Box>
+                    <PlayNextButton
+                      musicItem={musicItem}
+                      counter={counter}
+                      copyMusicList={copyMusicList}
+                      isButtonPressed={isButtonPressed}
+                      startOver={startOver}
+                      getSong={getSong}
+                    />
                   </Container>
                 </Box>
               </Grid>
