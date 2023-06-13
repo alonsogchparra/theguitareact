@@ -11,14 +11,10 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { ReactComponent as Icon } from '../../assets/guitareact_logo.svg';
 import { useSelector } from 'react-redux';
 import { theCurrentTheme } from '../../features/theme/themeSlice';
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import { Link } from 'react-router-dom';
 import { selectUser } from '../../features/auth/userSlice';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import { dashboardTypography } from '../../utils/typographySelection';
+import { DashboardOptions } from './DashboardOptions';
 
 let theme = dashboardTypography();
 
@@ -130,154 +126,7 @@ export const Dashboard = () => {
               </Box>
             </Grid>
 
-            <Box width='100%'>
-              <Grid container spacing={6} paddingTop={5}>
-                <Grid
-                  xs={12}
-                  md={6}
-                  lg={3}
-                  justifyContent='center'
-                  alignItems='center'
-                  className='gr_option_container'
-                >
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to='/random-songs-with-bpm'
-                  >
-                    <Box className='gr_box_options'>
-                      <Grid
-                        display='flex'
-                        flexDirection='column'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <PlayCircleFilledWhiteIcon
-                          style={{
-                            width: '5rem',
-                            height: '5rem',
-                            marginBottom: '1rem',
-                          }}
-                          className='gr_icon_choice'
-                        />
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          className='gr_text_choice'
-                        >
-                          Play random songs with BPM (All)
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Link>
-                </Grid>
-
-                <Grid
-                  xs={12}
-                  md={6}
-                  lg={3}
-                  justifyContent='center'
-                  alignItems='center'
-                  className='gr_option_container'
-                >
-                  <Link style={{ textDecoration: 'none' }} to='/random-videos'>
-                    <Box className='gr_box_options'>
-                      <Grid
-                        display='flex'
-                        flexDirection='column'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <PlayCircleOutlineIcon
-                          style={{
-                            width: '5rem',
-                            height: '5rem',
-                            marginBottom: '1rem',
-                          }}
-                          className='gr_icon_choice'
-                        />
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          className='gr_text_choice'
-                        >
-                          Play random videos (All)
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Link>
-                </Grid>
-                <Grid
-                  xs={12}
-                  md={6}
-                  lg={3}
-                  justifyContent='center'
-                  alignItems='center'
-                  className='gr_option_container'
-                >
-                  <Link style={{ textDecoration: 'none' }} to='/add-song'>
-                    <Box className='gr_box_options'>
-                      <Grid
-                        display='flex'
-                        flexDirection='column'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <AddCircleIcon
-                          style={{
-                            width: '5rem',
-                            height: '5rem',
-                            marginBottom: '1rem',
-                          }}
-                          className='gr_icon_choice'
-                        />
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          className='gr_text_choice'
-                        >
-                          Add songs to your list
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Link>
-                </Grid>
-                <Grid
-                  xs={12}
-                  md={6}
-                  lg={3}
-                  justifyContent='center'
-                  alignItems='center'
-                  className='gr_option_container'
-                >
-                  <Link style={{ textDecoration: 'none' }} to='/custom-lists'>
-                    <Box className='gr_box_options'>
-                      <Grid
-                        display='flex'
-                        flexDirection='column'
-                        alignItems='center'
-                        justifyContent='center'
-                      >
-                        <PlaylistAddIcon
-                          style={{
-                            width: '5rem',
-                            height: '5rem',
-                            marginBottom: '1rem',
-                          }}
-                          className='gr_icon_choice'
-                        />
-                        <Typography
-                          variant='body1'
-                          component='div'
-                          className='gr_text_choice'
-                        >
-                          Create a custom list
-                        </Typography>
-                      </Grid>
-                    </Box>
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
+            <DashboardOptions />
           </Grid>
         </Container>
       </ThemeProvider>
