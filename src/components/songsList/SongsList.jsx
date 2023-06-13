@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  Button,
   Container,
   CssBaseline,
   Hidden,
-  IconButton,
-  InputAdornment,
   responsiveFontSizes,
-  TextField,
   ThemeProvider,
-  Tooltip,
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import SearchIcon from '@mui/icons-material/Search';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import { SongItem } from './SongItem';
 import { SongModal } from './SongModal';
@@ -34,6 +26,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { LoadingAll } from '../layouts/LoadingAll';
 import { songsListTypography } from '../../utils/typographySelection';
+import { SongsSelectedMobileBtn } from './elements/SongsSelectedMobileBtn';
+import { SongListTextField } from './elements/SongListTextField';
+import { SongListTooltip } from './elements/SongListTooltip';
 
 let theme = songsListTypography();
 
@@ -220,34 +215,10 @@ export const SongsList = () => {
         >
           {songsTempList.length > 0 && (
             <Hidden lgUp>
-              <Container maxWidth='md' style={{ marginTop: 20 }}>
-                <Button
-                  variant='contained'
-                  className='gr_songs_selected_btn'
-                  fullWidth
-                  onClick={() => goToCustomList()}
-                >
-                  <Box width='100%'>
-                    <Grid
-                      display='flex'
-                      justifyContent='space-between'
-                      alignItems='center'
-                    >
-                      <PlaylistAddIcon
-                        style={{ width: '2rem', height: '2rem' }}
-                        className='gr_icon_songs_selected'
-                      />
-                      <Typography
-                        component='div'
-                        variant='h5'
-                        className='gr_number_songs_selected'
-                      >
-                        {songsTempList.length}
-                      </Typography>
-                    </Grid>
-                  </Box>
-                </Button>
-              </Container>
+              <SongsSelectedMobileBtn
+                goToCustomList={goToCustomList}
+                songsTempList={songsTempList}
+              />
             </Hidden>
           )}
 
@@ -267,30 +238,7 @@ export const SongsList = () => {
             alignItems='center'
             flexDirection='column'
           >
-            <Container component='form' maxWidth='md'>
-              <div>
-                <TextField
-                  // className='gr_search_songs_list'
-                  className='gr_email_input'
-                  id='song-artist-title'
-                  label='Find your song or artist'
-                  variant='standard'
-                  fullWidth
-                  margin='normal'
-                  autoComplete='off'
-                  onChange={(e) => filteredSongsHandler(e)}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton>
-                          <SearchIcon className='gr_icon_textfield' />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
-            </Container>
+            <SongListTextField filteredSongsHandler={filteredSongsHandler} />
 
             <Box width='100%'>
               <Grid container spacing={3} paddingTop={5}>
@@ -338,71 +286,11 @@ export const SongsList = () => {
 
           {songsTempList.length > 0 && (
             <Hidden lgDown>
-              <Tooltip
-                title={
-                  <>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      {songsTempList.map((songTemp) => (
-                        <div
-                          key={songTemp.id}
-                          style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            width: '10rem',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Typography variant='caption' noWrap>
-                            {songTemp.title}
-                          </Typography>
-                          <IconButton
-                            onClick={() =>
-                              deleteTemporalSongHandler(songTemp.id)
-                            }
-                          >
-                            <CancelIcon />
-                          </IconButton>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                }
-                arrow
-              >
-                <Button
-                  variant='contained'
-                  style={{
-                    position: 'absolute',
-                    top: '60px',
-                    width: '157px',
-                    height: '45px',
-                  }}
-                  className='gr_songs_selected_btn'
-                  onClick={() => goToCustomList()}
-                >
-                  <Box width='100%'>
-                    <Grid
-                      display='flex'
-                      justifyContent='space-between'
-                      alignItems='center'
-                    >
-                      <PlaylistAddIcon
-                        style={{ width: '2rem', height: '2rem' }}
-                        className='gr_icon_songs_selected'
-                      />
-                      <Typography
-                        component='div'
-                        variant='h5'
-                        className='gr_number_songs_selected'
-                      >
-                        {songsTempList.length}
-                      </Typography>
-                    </Grid>
-                  </Box>
-                </Button>
-              </Tooltip>
+              <SongListTooltip
+                songsTempList={songsTempList}
+                deleteTemporalSongHandler={deleteTemporalSongHandler}
+                goToCustomList={goToCustomList}
+              />
             </Hidden>
           )}
 
