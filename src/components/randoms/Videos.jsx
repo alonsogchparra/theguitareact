@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -11,14 +11,13 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/auth/userSlice';
 import { useFetchSongsQuery } from '../../features/songs/songsApi';
-import youtube from '../../api/youtube';
-import { key } from '../../keys/youtube';
 import { LoadingAll } from '../layouts/LoadingAll';
 import { videoTypography } from '../../utils/typographySelection';
 import { ExtraInfoVideo } from './videoElements/ExtraInfoVideo';
 import { VideoSelection } from './videoElements/VideoSelection';
 import { PlayNextVideo } from './videoElements/PlayNextVideo';
 import { VideoPlayer } from './videoElements/VideoPlayer';
+import { useRandomSongs } from '../../hooks/useRandomSongs';
 
 let theme = videoTypography();
 
@@ -27,79 +26,22 @@ theme = responsiveFontSizes(theme);
 export const Videos = () => {
   const user = useSelector(selectUser);
   const { data: songs, isLoading, isError, error } = useFetchSongsQuery();
-  const [musicList, setMusicList] = useState([]);
-  const [copyMusicList, setCopyMusicList] = useState([]);
-  const [musicItem, setMusicItem] = useState('');
-  const [counter, setCounter] = useState(0);
-  const [isButtonPressed, setIsButtonPressed] = useState(false);
 
-  const [selectedVideo, setSelectedVideo] = useState('');
-  const [videos, setVideos] = useState([]);
-  const [videoType, setVideoType] = useState('original');
-
-  const onSelectedVideo = (video) => setSelectedVideo(video);
-
-  const showVideoHandler = async (artist, title) => {
-    let searchTerm;
-
-    if (videoType === 'original') {
-      searchTerm = `${title} ${artist}`;
-    } else if (videoType === 'backing') {
-      searchTerm = `${title} ${artist} backing track`;
-    } else if (videoType === 'live') {
-      searchTerm = `${title} ${artist} live`;
-    }
-
-    try {
-      const response = await youtube.get('search', {
-        params: {
-          part: 'snippet',
-          maxResult: 5,
-          key,
-          q: searchTerm,
-        },
-      });
-      setVideos(response.data.items);
-      setSelectedVideo(response.data.items[0]);
-    } catch (error) {
-      console.log('ERROR SEARCHING VIDEO', error);
-    }
-  };
-
-  const getRandomNumber = (min, max) => {
-    let stepOne = max - min;
-    let stepTwo = Math.random() * stepOne;
-    let result = Math.floor(stepTwo) + min;
-    return result;
-  };
-
-  const getSong = () => {
-    if (musicList.length === 0) {
-      setMusicItem('');
-    } else {
-      setIsButtonPressed(true);
-      let randomIndex = getRandomNumber(0, musicList.length);
-      let randomSong = musicList[randomIndex];
-
-      setMusicList(
-        musicList.filter((music) => music.title !== randomSong.title)
-      );
-
-      setMusicItem(randomSong);
-      setCounter(counter + 1);
-
-      // showVideoHandler(musicItem?.artist, musicItem?.title);
-    }
-  };
-
-  const startOver = () => {
-    setMusicList(copyMusicList);
-    setCounter(0);
-    setMusicItem('');
-    setIsButtonPressed(false);
-    // setSelectedVideo('');
-    // setVideos([]);
-  };
+  const {
+    setMusicList,
+    copyMusicList,
+    setCopyMusicList,
+    counter,
+    musicItem,
+    isButtonPressed,
+    startOver,
+    getSong,
+    videos,
+    selectedVideo,
+    videoType,
+    setVideoType,
+    showVideoHandler,
+  } = useRandomSongs();
 
   const videoSrc = selectedVideo
     ? `https://www.youtube.com/embed/${selectedVideo.id.videoId}`
