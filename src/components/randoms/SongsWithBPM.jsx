@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -12,13 +12,11 @@ import { useFetchSongsQuery } from '../../features/songs/songsApi';
 import { selectUser } from '../../features/auth/userSlice';
 import { useSelector } from 'react-redux';
 import { LoadingAll } from '../layouts/LoadingAll';
-import { useMetronome } from 'react-metronome-hook';
-import click1 from '../../media/sounds/click1.wav';
-import click2 from '../../media/sounds/click2.wav';
 import { songsWithBPMTypography } from '../../utils/typographySelection';
 import { ExtraInfo } from './bpmElements/ExtraInfo';
 import { BPMController } from './bpmElements/BPMController';
 import { PlayNextButton } from './bpmElements/PlayNextButton';
+import { useRandomSongs } from '../../hooks/useRandomSongs';
 
 let theme = songsWithBPMTypography();
 
@@ -27,78 +25,25 @@ theme = responsiveFontSizes(theme);
 export const SongsWithBPM = () => {
   const user = useSelector(selectUser);
   const { data: songs, isLoading, isError, error } = useFetchSongsQuery();
-  const [musicList, setMusicList] = useState([]);
-  const [copyMusicList, setCopyMusicList] = useState([]);
-  const [musicItem, setMusicItem] = useState('');
-  const [counter, setCounter] = useState(0);
-  const [isButtonPressed, setIsButtonPressed] = useState(false);
-  const [addBPM, setAddBPM] = useState(120);
-  const [addBeatsPM, setAddBeatsPM] = useState(4);
-
-  const regex = /^[0-9\b]+$/;
-
-  //----------- NEW BPM ---------------
 
   const {
-    startMetronome,
+    setMusicList,
+    copyMusicList,
+    setCopyMusicList,
+    addBPM,
+    addBeatsPM,
+    counter,
+    musicItem,
     isTicking,
     stopMetronome,
-    bpm,
+    startMetronome,
+    changeBPMHandler,
+    isButtonPressed,
+    startOver,
+    getSong,
     setBpm,
     setBeatsPerMeasure,
-    setSounds,
-  } = useMetronome(120, 4, [click1, click2]);
-
-  const getRandomNumber = (min, max) => {
-    let stepOne = max - min;
-    let stepTwo = Math.random() * stepOne;
-    let result = Math.floor(stepTwo) + min;
-    return result;
-  };
-
-  const getSong = () => {
-    if (musicList.length === 0) {
-      setMusicItem('');
-    } else {
-      setIsButtonPressed(true);
-      let randomIndex = getRandomNumber(0, musicList.length);
-      let randomSong = musicList[randomIndex];
-
-      setMusicList(
-        musicList.filter((music) => music.title !== randomSong.title)
-      );
-
-      setMusicItem(randomSong);
-      setCounter(counter + 1);
-
-      setAddBPM(
-        randomSong?.beat_per_minute ? randomSong?.beat_per_minute : 120
-      );
-      setAddBeatsPM(
-        randomSong?.beats_per_measure ? randomSong?.beats_per_measure : 4
-      );
-    }
-  };
-
-  const changeBPMHandler = (e) => {
-    if (e.target.value === '' || regex.test(e.target.value)) {
-      if (e.target.name === 'bpm') {
-        setAddBPM(e.target.value);
-      } else {
-        setAddBeatsPM(e.target.value);
-      }
-    }
-  };
-
-  const startOver = () => {
-    if (isTicking) {
-      stopMetronome();
-    }
-    setMusicList(copyMusicList);
-    setCounter(0);
-    setMusicItem('');
-    setIsButtonPressed(false);
-  };
+  } = useRandomSongs();
 
   useEffect(() => {
     if (songs) {
