@@ -8,10 +8,8 @@ import {
   Modal,
   Typography,
 } from '@mui/material';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Link } from 'react-router-dom';
+import { SongModalOptions } from './elements/SongModalOptions';
 
 export const SongModal = ({
   artist,
@@ -45,20 +43,21 @@ export const SongModal = ({
                   <IconButton onClick={handleCloseModal}>
                     <CancelIcon
                       className='gr_close_modal_btn'
-                      style={{
-                        width: '3rem',
-                        height: '3rem',
+                      sx={{
+                        width: { xs: '2rem', md: '3rem' },
+                        height: { xs: '2rem', md: '3rem' },
                       }}
                     />
                   </IconButton>
                 </Grid>
 
-                <Grid marginBottom={5}>
+                <Grid sx={{ marginBottom: { xs: 1, md: 5 } }}>
                   <Typography
                     component='div'
                     variant='h4'
                     textAlign='center'
                     className='gr_modal_text_one'
+                    sx={{ fontSize: { xs: '1.5rem', md: '2.0243rem' } }}
                   >
                     You chose {title}
                   </Typography>
@@ -67,6 +66,7 @@ export const SongModal = ({
                     variant='h4'
                     textAlign='center'
                     className='gr_modal_text_one'
+                    sx={{ fontSize: { xs: '1.2rem', md: '2.0243rem' } }}
                   >
                     by {artist}
                   </Typography>
@@ -76,99 +76,21 @@ export const SongModal = ({
                     textAlign='center'
                     className='gr_modal_text_two'
                     marginTop={2}
+                    sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}
                   >
                     What you wanna do?
                   </Typography>
                 </Grid>
 
                 <Grid container spacing={6} paddingTop={5}>
-                  <Grid
-                    xs={12}
-                    md={6}
-                    justifyContent='center'
-                    alignItems='center'
-                    className='gr_option_container'
-                  >
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      to={`/bpm/${id}`}
-                      state={{
-                        artist,
-                        title,
-                        extraInfo,
-                        beatPerMinute,
-                        beatsPerMeasure,
-                      }}
-                    >
-                      <Box className='gr_box_options_modal'>
-                        <Grid
-                          display='flex'
-                          flexDirection='column'
-                          alignItems='center'
-                          justifyContent='center'
-                        >
-                          <PlayCircleFilledWhiteIcon
-                            style={{
-                              width: '5rem',
-                              height: '5rem',
-                              marginBottom: '1rem',
-                            }}
-                            className='gr_icon_choice_modal'
-                          />
-                          <Typography
-                            variant='body1'
-                            component='div'
-                            className='gr_text_choice_modal'
-                          >
-                            Play with BPM
-                          </Typography>
-                        </Grid>
-                      </Box>
-                    </Link>
-                  </Grid>
-
-                  <Grid
-                    xs={12}
-                    md={6}
-                    justifyContent='center'
-                    alignItems='center'
-                    className='gr_option_container'
-                  >
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      to={`/video/${id}`}
-                      state={{
-                        artist,
-                        title,
-                        extraInfo,
-                      }}
-                    >
-                      <Box className='gr_box_options_modal'>
-                        <Grid
-                          display='flex'
-                          flexDirection='column'
-                          alignItems='center'
-                          justifyContent='center'
-                        >
-                          <PlayCircleOutlineIcon
-                            style={{
-                              width: '5rem',
-                              height: '5rem',
-                              marginBottom: '1rem',
-                            }}
-                            className='gr_icon_choice_modal'
-                          />
-                          <Typography
-                            variant='body1'
-                            component='div'
-                            className='gr_text_choice_modal'
-                          >
-                            Play video
-                          </Typography>
-                        </Grid>
-                      </Box>
-                    </Link>
-                  </Grid>
+                  <SongModalOptions
+                    id={id}
+                    artist={artist}
+                    title={title}
+                    extraInfo={extraInfo}
+                    beatPerMinute={beatPerMinute}
+                    beatsPerMeasure={beatsPerMeasure}
+                  />
                 </Grid>
               </Box>
             </Grid>
