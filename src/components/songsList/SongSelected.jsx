@@ -25,8 +25,6 @@ export const SongSelected = () => {
     state: { artist, title, extraInfo },
   } = useLocation();
 
-  const onSelectedVideo = (video) => setSelectedVideo(video);
-
   const {
     videos,
     selectedVideo,
@@ -35,6 +33,8 @@ export const SongSelected = () => {
     setVideoType,
     showVideoHandler,
   } = useRandomSongs();
+
+  const onSelectedVideo = (video) => setSelectedVideo(video);
 
   const videoSrc = selectedVideo
     ? `https://www.youtube.com/embed/${selectedVideo.id.videoId}`

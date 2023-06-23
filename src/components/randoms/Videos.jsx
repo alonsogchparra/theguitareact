@@ -41,7 +41,10 @@ export const Videos = () => {
     videoType,
     setVideoType,
     showVideoHandler,
+    setSelectedVideo,
   } = useRandomSongs();
+
+  const onSelectedVideo = (video) => setSelectedVideo(video);
 
   const videoSrc = selectedVideo
     ? `https://www.youtube.com/embed/${selectedVideo.id.videoId}`
@@ -135,7 +138,11 @@ export const Videos = () => {
                   {/* Video Player */}
 
                   {musicItem !== '' && (
-                    <VideoPlayer videos={videos} videoSrc={videoSrc} />
+                    <VideoPlayer
+                      videos={videos}
+                      videoSrc={videoSrc}
+                      onSelectedVideo={onSelectedVideo}
+                    />
                   )}
 
                   <Box className='gr_operator' width='100%'>
